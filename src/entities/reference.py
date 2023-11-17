@@ -1,9 +1,9 @@
 from bibtexparser.bibdatabase import BibDatabase
 
 class Reference:
-    def __init__(self, type, key, author, title, year):
-        self._type = type
-        # Referring to the \cite{VPL11} (VPL11) value in the latex, for example. 
+    def __init__(self, reference_type, key, author, title, year):
+        self._type = reference_type
+        # Referring to the \cite{VPL11} (VPL11) value in the latex, for example.
         self._key = key
         self._author = author
         self._title = title

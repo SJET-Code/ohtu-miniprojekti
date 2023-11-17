@@ -14,4 +14,13 @@ disable=raw-checker-failed,
         use-symbolic-message-instead,
         missing-module-docstring,
         missing-function-docstring,
-        missing-class-docstring
+        missing-class-docstring,
+        too-few-public-methods
+
+[FORMAT]
+
+max-line-length=120
+
+[DESIGN]
+
+max-args=10
