@@ -12,6 +12,19 @@ files = [
 ]
 
 [[package]]
+name = "bibtexparser"
+version = "1.4.1"
+description = "Bibtex parser for python 3"
+optional = false
+python-versions = "*"
+files = [
+    {file = "bibtexparser-1.4.1.tar.gz", hash = "sha256:e00e29e24676c4808e0b4333b37bb55cca9cbb7871a56f63058509281588d789"},
+]
+
+[package.dependencies]
+pyparsing = ">=2.0.3"
+
+[[package]]
 name = "colorama"
 version = "0.4.6"
 description = "Cross-platform colored terminal text."
@@ -144,6 +157,20 @@ spelling = ["pyenchant (>=3.2,<4.0)"]
 testutils = ["gitpython (>3)"]
 
 [[package]]
+name = "pyparsing"
+version = "3.1.1"
+description = "pyparsing module - Classes and methods to define and execute parsing grammars"
+optional = false
+python-versions = ">=3.6.8"
+files = [
+    {file = "pyparsing-3.1.1-py3-none-any.whl", hash = "sha256:32c7c0b711493c72ff18a981d24f28aaf9c1fb7ed5e9667c9e84e3db623bdbfb"},
+    {file = "pyparsing-3.1.1.tar.gz", hash = "sha256:ede28a1a32462f5a9705e07aea48001a08f7cf81a021585011deba701581a0db"},
+]
+
+[package.extras]
+diagrams = ["jinja2", "railroad-diagrams"]
+
+[[package]]
 name = "pytest"
 version = "7.4.3"
 description = "pytest: simple powerful testing with Python"
@@ -177,4 +204,4 @@ files = [
 [metadata]
 lock-version = "2.0"
 python-versions = "^3.11"
-content-hash = "7ef775dac59d25132f56eae2e297e78a5c2b80e6ffa2135e2d5303cba0e8a202"
+content-hash = "f0c214dcfd4d614324142a7ef91c0dc234fdc8899532685a1374512f1a3f1909"
