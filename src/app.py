@@ -1,7 +1,13 @@
+from enum import Enum
 import bibtexparser
 from bibtexparser.bwriter import BibTexWriter
 from entities.reference import Reference
 
+class ReferenceOption(Enum):
+    TITLE = 1
+    AUTHOR = 2
+    YEAR = 3
+    REFERENCE_TYPE = 4
 
 class BibtexUi:
     def __init__(self, io):
@@ -31,21 +37,28 @@ class BibtexUi:
                     custom_reference_type = self._io.read(("Write your reference\n"))
                     self.add_reference(custom_reference_type)
 
-
-
             elif user_input == "2":
+                message = ("List by:"+
+                           "\n1: title\n2: author\n3: year\n4: reference type\n5: list all\n")
                 try:
-                    bibtexdatafile = self.read_from_bib_file()
-                    for reference in bibtexdatafile.entries:
-                        self._io.write(reference)
-                except FileNotFoundError:
-                    message = "Something went wrong. Probably your .bib file is empty/doesn't exist."
+                    input_type = int(self._io.read(message))
+
+                    if input_type == 5:
+                        self.list_references_by()
+                        continue
+
+                    parameter = self._io.read(f"Type the {ReferenceOption(input_type).name.lower()}:\n")
+                    self.list_references_by(parameter, ReferenceOption(input_type).name.lower())
+
+                except ValueError:
+                    message = "Invalid input. Please enter a correct number."
                     self._io.write(message)
+
             elif user_input == "3":
                 self._run = False
 
             else:
-                self._io.write("Virheellinen syöte.")
+                self._io.write("Invalid input.")
 
     def add_reference(self, reference_type):
         key = self._io.read("Insert reference key (viiteavain): ")
@@ -67,3 +80,20 @@ class BibtexUi:
         with open('references.bib', encoding="utf-8") as bibtex_file:
             bibtexdatafile = bibtexparser.load(bibtex_file)
         return bibtexdatafile
+
+    def list_references_by(self, search_term=None, content_type=None):
+        try:
+            bibtexdatafile = self.read_from_bib_file()
+        except FileNotFoundError:
+            message = "Something went wrong. Probably your .bib file is empty/doesn't exist."
+            self._io.write(message)
+
+        self._io.write("\nFound:\n")
+
+        for reference in bibtexdatafile.entries:
+            if not content_type or (content_type in reference and search_term in reference[content_type]):
+                self._io.write(f"\nID: {reference['ID']}\n"
+                f"Title: {reference['title']}\n"
+                f"Author: {reference['author']}"
+                f"Year: {reference['year']}\n"
+                f"Reference type: {reference['ENTRYTYPE']}\n")

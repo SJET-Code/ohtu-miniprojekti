@@ -1,5 +1,7 @@
 import unittest
 from entities.reference import Reference
+from app import BibtexUi
+from unittest.mock import Mock
 
 class TestReference(unittest.TestCase):
     def setUp(self):
@@ -18,3 +20,13 @@ class TestReference(unittest.TestCase):
         entry = bibtex.entries[0]
 
         self.assertEqual(entry, model_entry)
+
+    def test_add_new_reference_returns_correct_output(self):
+        mock_io = Mock()
+        bibtext_ui = BibtexUi(mock_io)
+
+        mock_io.read.side_effect = ['key1', 'aaa', 'title1', '2022']
+        bibtext_ui.add_reference("book")
+
+        expected_output = "Added an book key1, titled title1 (2022), by aaa"
+        mock_io.write.assert_called_once_with(expected_output)
