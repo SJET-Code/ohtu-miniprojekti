@@ -1,5 +1,4 @@
 from enum import Enum
-from entities.reference import Reference
 from services.bibtex_service import BibTextService
 
 
@@ -13,6 +12,7 @@ class BibtexUi:
     def __init__(self, io):
         self._io = io
         self._run = True
+        self.service = BibTextService()
 
     def start(self):
         while self._run:
@@ -67,11 +67,11 @@ class BibtexUi:
         year = int(self._io.read("Insert year: "))
 
         self._io.write(f"Added an {reference_type} {key}, titled {title} ({year}), by {author}")
-        BibTextService.write_to_bib_file(reference_type, key, author, title, year)
+        self.service.write_to_bib_file(reference_type, key, author, title, year)
 
     def list_references_by(self, search_term=None, content_type=None):
         try:
-            bibtexdatafile = BibTextService.read_from_bib_file()
+            bibtexdatafile = self.service.read_from_bib_file()
         except FileNotFoundError:
             message = "Something went wrong. Probably your .bib file is empty/doesn't exist."
             self._io.write(message)
