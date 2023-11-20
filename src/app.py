@@ -1,7 +1,7 @@
 from enum import Enum
-import bibtexparser
-from bibtexparser.bwriter import BibTexWriter
 from entities.reference import Reference
+from services.bibtex_service import BibTextService
+
 
 class ReferenceOption(Enum):
     TITLE = 1
@@ -67,23 +67,11 @@ class BibtexUi:
         year = int(self._io.read("Insert year: "))
 
         self._io.write(f"Added an {reference_type} {key}, titled {title} ({year}), by {author}")
-        output_refrence  = Reference(reference_type, key, author, title, year )
-        self.write_to_bib_file(output_refrence)
-
-    def write_to_bib_file(self, data):
-        writer = BibTexWriter()
-        entry = data.create_bibtex_format()
-        with open("references.bib", "a", encoding="utf-8") as bibfile:
-            bibfile.write(writer.write(entry))
-
-    def read_from_bib_file(self):
-        with open('references.bib', encoding="utf-8") as bibtex_file:
-            bibtexdatafile = bibtexparser.load(bibtex_file)
-        return bibtexdatafile
+        BibTextService.write_to_bib_file(reference_type, key, author, title, year)
 
     def list_references_by(self, search_term=None, content_type=None):
         try:
-            bibtexdatafile = self.read_from_bib_file()
+            bibtexdatafile = BibTextService.read_from_bib_file()
         except FileNotFoundError:
             message = "Something went wrong. Probably your .bib file is empty/doesn't exist."
             self._io.write(message)
@@ -94,6 +82,6 @@ class BibtexUi:
             if not content_type or (content_type in reference and search_term in reference[content_type]):
                 self._io.write(f"\nID: {reference['ID']}\n"
                 f"Title: {reference['title']}\n"
-                f"Author: {reference['author']}"
+                f"Author: {reference['author']}\n"
                 f"Year: {reference['year']}\n"
                 f"Reference type: {reference['ENTRYTYPE']}\n")
