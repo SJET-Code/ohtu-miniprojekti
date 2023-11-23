@@ -4,7 +4,7 @@
 
 Helsingin yliopiston Ohjelmistotekniikka-kurssin miniprojekti, jonka tavoite on tehdä LaTex viittauksian hallinnoimisesta helpompaa!
 
-## Asennus ohjeet
+## Asennusohjeet
 
 TBD
 
