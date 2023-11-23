@@ -2,7 +2,7 @@
 
 ![CI workflow badge](https://github.com/SJET-Code/ohtu-miniprojekti/workflows/CI/badge.svg)
 
-Helsingin yliopiston Ohjelmistotekniikka-kurssin miniprojekti, jonka tavoite on tehdä LaTex viittauksien hallinnoimisesta helpompaa!
+Helsingin yliopiston Ohjelmistotuotanto-kurssin miniprojekti, jonka tavoite on tehdä LaTex viittauksien hallinnoimisesta helpompaa!
 
 ## Asennus
 
