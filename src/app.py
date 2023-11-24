@@ -75,7 +75,7 @@ class BibtexUi:
             message = "Something went wrong. Probably your .bib file is empty/doesn't exist."
             self._io.write(message)
             return
-        
+
         self._io.write("\nFound:\n")
 
         for reference in bibtexdatafile.entries:

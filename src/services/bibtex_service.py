@@ -17,6 +17,6 @@ class BibTextService:
         try:
             with open('references.bib', encoding="utf-8") as bibtex_file:
                 bibtexdatafile = bibtexparser.load(bibtex_file)
-        except:
+        except FileNotFoundError:
             return FileNotFoundError
         return bibtexdatafile
