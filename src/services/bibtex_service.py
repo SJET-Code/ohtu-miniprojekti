@@ -14,6 +14,9 @@ class BibTextService:
             bibfile.write(writer.write(entry))
 
     def read_from_bib_file(self):
-        with open('references.bib', encoding="utf-8") as bibtex_file:
-            bibtexdatafile = bibtexparser.load(bibtex_file)
+        try:
+            with open('references.bib', encoding="utf-8") as bibtex_file:
+                bibtexdatafile = bibtexparser.load(bibtex_file)
+        except:
+            return FileNotFoundError
         return bibtexdatafile

@@ -70,12 +70,12 @@ class BibtexUi:
         self.service.write_to_bib_file(reference_type, key, author, title, year)
 
     def list_references_by(self, search_term=None, content_type=None):
-        try:
-            bibtexdatafile = self.service.read_from_bib_file()
-        except FileNotFoundError:
+        bibtexdatafile = self.service.read_from_bib_file()
+        if bibtexdatafile == FileNotFoundError:
             message = "Something went wrong. Probably your .bib file is empty/doesn't exist."
             self._io.write(message)
-
+            return
+        
         self._io.write("\nFound:\n")
 
         for reference in bibtexdatafile.entries:
