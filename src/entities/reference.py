@@ -22,5 +22,4 @@ class Reference:
         ]
 
         return bibtex_format
-    
-    
+        

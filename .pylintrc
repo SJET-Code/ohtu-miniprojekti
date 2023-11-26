@@ -3,7 +3,7 @@
 ignore=tests
 
 [MESSAGE CONTROL]
-
+#pylint: disable=too-many-branches
 disable=raw-checker-failed,
         bad-inline-option,
         locally-disabled,
@@ -22,5 +22,5 @@ disable=raw-checker-failed,
 max-line-length=120
 
 [DESIGN]
-
+max-branches=20
 max-args=10

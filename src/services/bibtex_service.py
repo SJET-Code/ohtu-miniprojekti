@@ -12,16 +12,14 @@ class BibTextService:
         entry = reference.create_bibtex_format()
         with open("references.bib", "a", encoding="utf-8") as bibfile:
             bibfile.write(writer.write(entry))
-            
     #it basically rewrites the file, change name if other usages than delete exist.
     def delete_from_bib_file(self, references):
         writer = BibTexWriter()
-        try:
-            with open("references.bib", "w", encoding="utf-8") as bibfile:
-                for reference in references:
-                    bibfile.write(writer.write(reference.create_bibtex_format()))
-        except TypeError:
-            return TypeError
+
+        with open("references.bib", "w", encoding="utf-8") as bibfile:
+            for reference in references:
+                bibfile.write(writer.write(reference.create_bibtex_format()))
+
 
     def read_from_bib_file(self):
         try:
