@@ -1,6 +1,6 @@
 from enum import Enum
 from services.bibtex_service import BibTextService
-
+from entities.reference import Reference
 
 class ReferenceOption(Enum):
     TITLE = 1
@@ -17,7 +17,7 @@ class BibtexUi:
     def start(self):
         while self._run:
 
-            message = "Type the number for your action:\n1: add reference\n2: list references \n3: exit\n"
+            message = "Type the number for your action:\n1: add reference\n2: list references \n3: remove reference\n4: exit\n"
             user_input = self._io.read(message)
 
             if user_input == "1":
@@ -55,6 +55,17 @@ class BibtexUi:
                     self._io.write(message)
 
             elif user_input == "3":
+                message = ('Write the ID/Key of the article you want to delete or type "DELALL" to delete all:\n')
+
+                try:
+                    self.list_references_by()
+                    input_type = str(self._io.read(message))
+                    self.remove_reference(input_type)
+                except ValueError:
+                    message = "Invalid input. Please enter a correct or existing ID!."
+                    self._io.write(message)
+
+            elif user_input == "4":
                 self._run = False
 
             else:
@@ -68,6 +79,29 @@ class BibtexUi:
 
         self._io.write(f"Added an {reference_type} {key}, titled {title} ({year}), by {author}")
         self.service.write_to_bib_file(reference_type, key, author, title, year)
+
+    def remove_reference(self, ID):
+        if (ID == "DELALL"):
+            self.service.delete_from_bib_file([])
+        references = self.service.read_from_bib_file()
+
+        testingLista = []
+
+        for value in references.entries:
+            if ((value.get("ID")) != ID):
+                testingLista.append(value)
+
+        bibtexList = self.reference_list_generator(testingLista)
+        self.service.delete_from_bib_file(bibtexList)
+    
+    def reference_list_generator(self, references):
+        newReferencesList = []
+        #can/should be expanded for each specific entrytype
+        for reference in references:
+            newReference = Reference(reference["ENTRYTYPE"], reference["ID"], reference["author"], reference["title"], reference["year"],)
+            newReferencesList.append(newReference)
+            
+        return newReferencesList
 
     def list_references_by(self, search_term=None, content_type=None):
         bibtexdatafile = self.service.read_from_bib_file()
