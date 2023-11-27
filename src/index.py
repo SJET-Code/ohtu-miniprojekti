@@ -1,8 +1,8 @@
 from app import BibtexUi
-from reader_writer import ReaderWriter
+from services.io_service import IOService
 
 def main():
-    io = ReaderWriter()
+    io = IOService()
     ui = BibtexUi(io)
     ui.start()
 

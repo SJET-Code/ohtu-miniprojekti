@@ -24,3 +24,5 @@ jobs:
         run: poetry run pytest
       - name: Lint
         run: poetry run pylint src
+      - name: Run Robot Framework tests
+        run: poetry run robot src/tests

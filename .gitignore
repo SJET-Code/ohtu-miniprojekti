@@ -160,3 +160,10 @@ cython_debug/
 #.idea/
 
 references.bib
+test_references.bib
+
+#robot stuff
+
+log.html
+output.xml
+report.html

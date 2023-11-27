@@ -9,10 +9,11 @@ class ReferenceOption(Enum):
     REFERENCE_TYPE = 4
 
 class BibtexUi:
-    def __init__(self, io):
+    def __init__(self, io, test = False):
         self._io = io
         self._run = True
         self.service = BibTextService()
+        self._test = test
 
     def start(self):
         while self._run:
@@ -79,11 +80,18 @@ class BibtexUi:
         year = int(self._io.read("Insert year: "))
 
         self._io.write(f"Added an {reference_type} {key}, titled {title} ({year}), by {author}")
-        self.service.write_to_bib_file(reference_type, key, author, title, year)
+        if self._test:
+            self.service.write_to_bib_file(reference_type, key, author, title, year, 'test_references')
+        else:
+            self.service.write_to_bib_file(reference_type, key, author, title, year)
 
     def remove_reference(self, reference_id):
         if reference_id == "DELALL":
-            self.service.delete_from_bib_file([])
+            if self._test:
+                self.service.delete_from_bib_file([],'test_references')
+            else:
+                self.service.delete_from_bib_file([])
+            return
         references = self.service.read_from_bib_file()
 
         copyreferencelist = []
@@ -93,7 +101,11 @@ class BibtexUi:
                 copyreferencelist.append(value)
 
         bibtex_reference_list = self.reference_list_generator(copyreferencelist)
-        self.service.delete_from_bib_file(bibtex_reference_list)
+        if self._test:
+            self.service.delete_from_bib_file(bibtex_reference_list,'test_references')
+        else:
+            self.service.delete_from_bib_file(bibtex_reference_list)
+
     def reference_list_generator(self, references):
         new_references_list = []
         #can/should be expanded for each specific entrytype
@@ -104,10 +116,16 @@ class BibtexUi:
         return new_references_list
 
     def list_references_by(self, search_term=None, content_type=None):
-        bibtexdatafile = self.service.read_from_bib_file()
+        if self._test:
+            bibtexdatafile = self.service.read_from_bib_file('test_references')
+        else:
+            bibtexdatafile = self.service.read_from_bib_file()
         if bibtexdatafile == FileNotFoundError:
             message = "Something went wrong. Probably your .bib file is empty/doesn't exist."
             self._io.write(message)
+            return
+        if len(bibtexdatafile.entries) == 0:
+            self._io.write("\nNo Citations Found\n")
             return
 
         self._io.write("\nFound:\n")
