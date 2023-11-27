@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Bibtex Web App</title>
+</head>
+<body>
+    <h1>Welcome to Bibtex Web App</h1>
+    <form action="/add_reference" method="post">
+        <label for="reference_type">Choose reference type:</label>
+        <select id="reference_type" name="reference_type">
+            <option value="inproceedings">Inproceedings</option>
+            <option value="article">Article</option>
+            <option value="book">Book</option>
+        </select>
+        <button type="submit">Add Reference</button>
+    </form>
+</body>
+</html>
