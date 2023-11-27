@@ -1,5 +1,6 @@
 from enum import Enum
 from services.bibtex_service import BibTextService
+from services.file_service import FileService
 from entities.reference import Reference
 
 class ReferenceOption(Enum):
@@ -19,7 +20,7 @@ class BibtexUi:
         while self._run:
 
             message = ("Type the number for your action: "+
-            "\n1: add reference\n2: list references \n3: remove reference\n4: exit\n")
+            "\n1: add reference\n2: list references \n3: remove reference\n4: manage bibtex file\n5: exit\n")
             user_input = self._io.read(message)
 
             if user_input == "1":
@@ -68,6 +69,18 @@ class BibtexUi:
                     self._io.write(message)
 
             elif user_input == "4":
+                message = ("Manage bibtex file" +
+                           "\n1: create empty .bib file\n2: delete bibtex file\n")
+                choose_reference = self._io.read(message)
+
+                if choose_reference == "1":
+                    message = FileService.add_bibtex_file(self, "./references.bib")
+
+                elif choose_reference == "2":
+                    message = FileService.remove_bibtex_file(self, "./references.bib")
+                self._io.write(message)
+
+            elif user_input == "5":
                 self._run = False
 
             else:
