@@ -17,7 +17,7 @@ Add Test Reference Potter
     Input Reference  HP1  J.K. Rowling  Harry Potter  1997
 
 Run App And Stop
-    Input  4
+    Input  5
     Start
 
 Go To Input Article

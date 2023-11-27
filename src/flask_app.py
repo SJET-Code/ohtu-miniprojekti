@@ -12,7 +12,7 @@ def index():
 
 @app.route("/add_reference", methods=["POST"])
 def add_reference():
-    reference_type = request.form["reference_type"]
+    reference_type = request.form["reference_type"] # pylint: disable=W0612
     return render_template("index.html")
 
 if __name__ == "__main__":

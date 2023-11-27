@@ -16,7 +16,7 @@ class StubIOService:
     def read(self, prompt):
         if len(self.inputs) > 0:
             return self.inputs.pop(0)
-        return "4"
+        return "5"
 
     def add_input(self, value):
         self.inputs.append(value)
