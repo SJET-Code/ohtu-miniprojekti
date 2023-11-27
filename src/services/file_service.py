@@ -13,7 +13,7 @@ class FileService:
 
     def add_bibtex_file(self, filename):
         try:
-            with open(filename, "x", encoding="utf-8") as new_file:
-                return f"{new_file} created succesfully.\n"
+            with open(filename, "x", encoding="utf-8"):
+                return f"{filename} created succesfully.\n"
         except FileExistsError:
             return f"{filename} is already existent.\n"
