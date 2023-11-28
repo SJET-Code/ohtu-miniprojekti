@@ -1,10 +1,11 @@
 import bibtexparser
 from bibtexparser.bwriter import BibTexWriter
 from entities.reference import Reference
+from services.file_service import FileService
 
 class BibTextService:
     def __init__(self):
-        pass
+        self._file_service = FileService()
 
     def write_to_bib_file(self,reference_type, key, author, title, year, file_name = None):
         reference  = Reference(reference_type, key, author, title, year)
@@ -30,6 +31,11 @@ class BibTextService:
 
 
     def read_from_bib_file(self, file_name = None):
+        if file_name is None:
+            self._file_service.create_file_if_not_exists("references.bib")
+        else:
+            self._file_service.create_file_if_not_exists(file_name + ".bib")
+
         try:
             if not file_name:
                 with open('references.bib', encoding="utf-8") as bibtex_file:
