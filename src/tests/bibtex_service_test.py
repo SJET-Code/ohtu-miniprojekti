@@ -40,6 +40,19 @@ class TestBibTextService(unittest.TestCase):
 
         self.assertTrue(model_string in file_content)
 
+    def test_writes_into_new_bibfile_if_filename_is_none(self):
+        model_string = ("@article{abc,\n"+
+                        " author = {def},\n"+
+                        " title = {ghi},\n"+
+                        " year = {2013}\n}")
+
+        self.bibtex_service.write_to_bib_file("article", "abc", "def", "ghi", 2013)
+
+        with open("references.bib", "r", encoding="utf-8") as bibtex_file:
+            file_content = bibtex_file.read()
+
+        self.assertTrue(model_string in file_content)
+
     def test_deletes_from_bibtex_file_correctly(self):
         self.bibtex_service.delete_all_from_bib_file(self.file_name)
 

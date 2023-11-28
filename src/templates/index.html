@@ -24,21 +24,52 @@
 
     <h2>References</h2>
 
-    <form action="/delete_references" method="post">
+    <form action="/delete_references" method="post" onsubmit="return confirmDelete();">
         <button type="submit">Delete all references</button>
     </form>
 
+    <form id="searchForm">
+        <label for="searchTerm">Search: </label>
+        <input type="text" id="searchTerm" name="searchTerm">
+        <button type="button" onclick="searchReferences()">Search</button>
+    </form>
+
     {% for reference in references %}
-        <div style="margin-bottom:50px;">
-            <p>Type: {{ reference.ENTRYTYPE }}</p>
-            <p>ID: {{ reference.ID }}</p>
-            <p>Title: {{ reference.title }}</p>
-            <p>Author: {{ reference.author }}</p>
-            <p>Year: {{ reference.year }}</p>
-            <form action="/delete_reference/{{ reference.ID }}" method="post">
-                <button type="submit">Delete</button>
-            </form>
-        </div>
-    {% endfor %}
+    <div class="referenceItem" style="margin-bottom:50px;">
+        <p>Type: {{ reference.ENTRYTYPE }}</p>
+        <p>ID: {{ reference.ID }}</p>
+        <p class="title">Title: {{ reference.title }}</p>
+        <p class="author">Author: {{ reference.author }}</p>
+        <p>Year: {{ reference.year }}</p>
+        <form action="/delete_reference/{{ reference.ID }}" method="post">
+            <button type="submit">Delete</button>
+        </form>
+    </div>
+{% endfor %}
 </body>
 </html>
+
+<script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
+<script>
+    function searchReferences() {
+        var searchTerm = $('#searchTerm').val().toLowerCase();
+
+        $('.referenceItem').each(function () {
+            var referenceTitle = $(this).find('.title').text().toLowerCase();
+            var referenceAuthor = $(this).find('.author').text().toLowerCase();
+
+            if (referenceTitle.includes(searchTerm) || referenceAuthor.includes(searchTerm)) {
+                $(this).show();
+            } else {
+                $(this).hide();
+            }
+        });
+    }
+</script>
+
+<script>
+    function confirmDelete() {
+        var result = confirm("Are you sure you want to delete all references?");
+        return result;
+    }
+</script>

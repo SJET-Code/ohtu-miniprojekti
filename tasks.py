@@ -7,3 +7,7 @@ def flask(ctx):
 @task
 def start(ctx):
     ctx.run("python3 src/index.py", pty=True)
+
+@task
+def cov(ctx):
+    ctx.run("coverage run --branch -m pytest; coverage html", pty=True)
