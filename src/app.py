@@ -1,7 +1,6 @@
 from enum import Enum
 from services.bibtex_service import BibTextService
 from services.file_service import FileService
-from entities.reference import Reference
 
 class ReferenceOption(Enum):
     TITLE = 1
@@ -101,32 +100,16 @@ class BibtexUi:
     def remove_reference(self, reference_id):
         if reference_id == "DELALL":
             if self._test:
-                self.service.delete_from_bib_file([],'test_references')
+                self.service.delete_all_from_bib_file('test_references')
             else:
-                self.service.delete_from_bib_file([])
+                self.service.delete_all_from_bib_file()
             return
         references = self.service.read_from_bib_file()
 
-        copyreferencelist = []
-
-        for value in references.entries:
-            if (value.get("ID")) != reference_id:
-                copyreferencelist.append(value)
-
-        bibtex_reference_list = self.reference_list_generator(copyreferencelist)
         if self._test:
-            self.service.delete_from_bib_file(bibtex_reference_list,'test_references')
+            self.service.delete_from_bib_file(reference_id, references,'test_references')
         else:
-            self.service.delete_from_bib_file(bibtex_reference_list)
-
-    def reference_list_generator(self, references):
-        new_references_list = []
-        #can/should be expanded for each specific entrytype
-        for reference in references:
-            new_reference = Reference(reference["ENTRYTYPE"], reference["ID"],
-                reference["author"], reference["title"], reference["year"],)
-            new_references_list.append(new_reference)
-        return new_references_list
+            self.service.delete_from_bib_file(reference_id, references)
 
     def list_references_by(self, search_term=None, content_type=None):
         if self._test:

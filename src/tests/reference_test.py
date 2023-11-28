@@ -19,11 +19,11 @@ class TestReference(unittest.TestCase):
         bibtex = self.reference.create_bibtex_format()
         entry = bibtex.entries[0]
 
-        self.assertEqual(entry, model_entry)
+        self.assertDictEqual(entry, model_entry)
 
     def test_add_new_reference_returns_correct_output(self):
         mock_io = Mock()
-        bibtext_ui = BibtexUi(mock_io)
+        bibtext_ui = BibtexUi(mock_io, True)
 
         mock_io.read.side_effect = ['key1', 'aaa', 'title1', '2022']
         bibtext_ui.add_reference("book")

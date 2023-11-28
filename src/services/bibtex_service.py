@@ -17,8 +17,7 @@ class BibTextService:
             with open(f"{file_name}.bib", "a", encoding="utf-8") as bibfile:
                 bibfile.write(writer.write(entry))
 
-    #it basically rewrites the file, change name if other usages than delete exist.
-    def delete_from_bib_file(self, references, file_name = None):
+    def rewrite_bib_file(self, references, file_name = None):
         writer = BibTexWriter()
         if not file_name:
             with open("references.bib", "w", encoding="utf-8") as bibfile:
@@ -41,3 +40,25 @@ class BibTextService:
         except FileNotFoundError:
             return FileNotFoundError
         return bibtexdatafile
+
+    def delete_from_bib_file(self, reference_id, references, file_name = None):
+        copyreferencelist = []
+
+        for value in references.entries:
+            if value.get("ID") != reference_id:
+                copyreferencelist.append(value)
+
+        bibtex_reference_list = self._reference_list_generator(copyreferencelist)
+        self.rewrite_bib_file(bibtex_reference_list, file_name)
+
+    def delete_all_from_bib_file(self, file_name = None):
+        self.rewrite_bib_file([], file_name)
+
+    def _reference_list_generator(self, references):
+        new_references_list = []
+        #can/should be expanded for each specific entrytype
+        for reference in references:
+            new_reference = Reference(reference["ENTRYTYPE"], reference["ID"],
+                reference["author"], reference["title"], reference["year"],)
+            new_references_list.append(new_reference)
+        return new_references_list

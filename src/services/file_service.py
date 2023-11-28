@@ -17,3 +17,10 @@ class FileService:
                 return f"{filename} created succesfully.\n"
         except FileExistsError:
             return f"{filename} is already existent.\n"
+
+    def create_file_if_not_exists(self, filename):
+        try:
+            with open(filename, "x", encoding="utf-8"):
+                pass
+        except FileExistsError:
+            pass
