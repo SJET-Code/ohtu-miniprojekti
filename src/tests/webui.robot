@@ -7,11 +7,13 @@ Test Setup  Go To Main Page
 
 *** Test Cases ***
 Open WebUi
+    Open And Configure Browser
+    Go To Main Page
     Welcome Page Should Be Open
 
 Add Inproceedings Reference 
-    Open Browser  ${HOME_URL}  chrome
-    Maximize Browser Window
+    [Setup]  Open And Configure Browser
+    Go To Main Page
 
     Select From List by Value  id=reference_type  inproceedings
 
@@ -50,5 +52,5 @@ Remove Reference
     
     Click Element  xpath=//div[contains(@class,'referenceItem') and .//p[contains(text(),'test_key')]]//button
 
-    Close Browser
+    #Close Browser
     
