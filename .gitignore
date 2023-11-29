@@ -161,7 +161,7 @@ cython_debug/
 
 references.bib
 test_references.bib
-
+selenium-screenshot*
 #robot stuff
 
 log.html
