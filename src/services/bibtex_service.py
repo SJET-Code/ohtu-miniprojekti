@@ -29,7 +29,6 @@ class BibTextService:
                 for reference in references:
                     bibfile.write(writer.write(reference.create_bibtex_format()))
 
-
     def read_from_bib_file(self, file_name = None):
         if file_name is None:
             self._file_service.create_file_if_not_exists("references.bib")

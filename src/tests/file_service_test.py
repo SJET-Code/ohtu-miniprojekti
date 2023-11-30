@@ -17,8 +17,7 @@ class TestFileService(unittest.TestCase):
         
     def test_bibfile_can_be_created(self):
         self.file_service.add_bibtex_file(self.file_name)
-        pl.Path(f"./{self.file_name}")
-        self.cleanup()
+        self.assertIsFile(f"./{self.file_name}")
 
     def test_bibfile_error_if_exists(self):
         self.file_service.add_bibtex_file(self.file_name)

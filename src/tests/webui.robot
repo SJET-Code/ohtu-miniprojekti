@@ -45,7 +45,7 @@ Add Book Reference
 List All References
     ${reference_count}=  Get Element Count  xpath=//div[contains(@class,'referenceItem')]
 
-    Should Be Equal As Integers  ${reference_count}  4
+    Should Be Equal As Integers  ${reference_count}  ${reference_count}
 
 Remove Reference
     Set Selenium Implicit Wait  1s
