@@ -5,6 +5,10 @@ psql postgresql://postgres:postgres@localhost:5432 < schema.sql
 
 poetry invoke flask &
 
+while [[ "$(curl -s -o /dev/null -w ''%{http_code}'' localhost:5000)" != "200" ]];
+  do sleep 1;
+done
+
 poetry run robot src/tests
 
 status=$?
