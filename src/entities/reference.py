@@ -22,4 +22,22 @@ class Reference:
         ]
 
         return bibtex_format
-        
+    @property
+    def key(self):
+        return self._key
+
+    @property
+    def type(self):
+        return self._type
+
+    @property
+    def author(self):
+        return self._author
+
+    @property
+    def title(self):
+        return self._title
+
+    @property
+    def year(self):
+        return str(self._year)

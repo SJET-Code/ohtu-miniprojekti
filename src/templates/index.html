@@ -36,12 +36,12 @@
 
     {% for reference in references %}
     <div class="referenceItem" style="margin-bottom:50px;">
-        <p>Type: {{ reference.ENTRYTYPE }}</p>
-        <p>ID: {{ reference.ID }}</p>
+        <p>Type: {{ reference.type }}</p>
+        <p>Key: {{ reference.key }}</p>
         <p class="title">Title: {{ reference.title }}</p>
         <p class="author">Author: {{ reference.author }}</p>
         <p>Year: {{ reference.year }}</p>
-        <form action="/delete_reference/{{ reference.ID }}" method="post">
+        <form action="/delete_reference/{{ reference.key }}" method="post">
             <button type="submit">Delete</button>
         </form>
     </div>

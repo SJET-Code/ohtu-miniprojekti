@@ -15,7 +15,9 @@ disable=raw-checker-failed,
         missing-module-docstring,
         missing-function-docstring,
         missing-class-docstring,
-        too-few-public-methods
+        too-few-public-methods,
+        cyclic-import,
+        wrong-import-position
 
 [FORMAT]
 

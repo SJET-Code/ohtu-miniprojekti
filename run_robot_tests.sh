@@ -1,7 +1,9 @@
 #!/bin/bash
+export DATABASE_URL=postgresql://postgres:postgres@localhost:5432
 
-poetry run python3 src/flask_app.py &
+psql postgresql://postgres:postgres@localhost:5432 < schema.sql
 
+poetry invoke flask &
 
 poetry run robot src/tests
 
