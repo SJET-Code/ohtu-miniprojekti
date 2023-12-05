@@ -53,4 +53,12 @@ Remove Reference
     Click Element  xpath=//div[contains(@class,'referenceItem') and .//p[contains(text(),'test_key1')]]//button
     Click Element  xpath=//div[contains(@class,'referenceItem') and .//p[contains(text(),'test_key2')]]//button
     Click Element  xpath=//div[contains(@class,'referenceItem') and .//p[contains(text(),'test_key3')]]//button
-    
+
+Show References As Bibtex
+    Select From List by Value  id=reference_type  article
+    Input Reference  test_key4  test_author  test_title  2023
+    Submit Reference
+
+    Click Element  xpath=//button[contains(text(), "Show references as bibtex")]
+
+    Wait Until Page Contains Element  xpath=//div[contains(@class,'referenceBibtex') and .//p[contains(text(),'@article{test_key4,')]]

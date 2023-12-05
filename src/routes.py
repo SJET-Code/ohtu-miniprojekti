@@ -11,8 +11,11 @@ bibtex_service = BibTextService()
 @app.route("/")
 def index():
     citation_data = citation_repo.get_citations()
+    bibtex_data = bibtex_service.get_references_in_bibtex_format(citation_data)
+    show_bibtex = request.args.get("show_bibtex")
 
-    return render_template("index.html", references=citation_data)
+    return render_template("index.html", references=citation_data,
+                           references_bibtex=bibtex_data, show_bibtex=show_bibtex)
 
 @app.route("/add_reference", methods=["POST"])
 def add_reference():

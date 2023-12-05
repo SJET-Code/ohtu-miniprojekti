@@ -8,15 +8,15 @@ class BibTextService:
         self._file_service = FileService()
 
     def write_to_bib_file(self,reference_type, key, author, title, year, file_name = None):
-        reference  = Reference(reference_type, key, author, title, year)
-        writer = BibTexWriter()
-        entry = reference.create_bibtex_format()
+        reference = Reference(reference_type, key, author, title, year)
+        bibtex = self.get_bibtex_string(reference)
+
         if not file_name:
             with open("references.bib", "a", encoding="utf-8") as bibfile:
-                bibfile.write(writer.write(entry))
+                bibfile.write(bibtex)
         else:
             with open(f"{file_name}.bib", "a", encoding="utf-8") as bibfile:
-                bibfile.write(writer.write(entry))
+                bibfile.write(bibtex)
 
     def rewrite_bib_file(self, references, file_name = None):
         writer = BibTexWriter()
@@ -58,6 +58,20 @@ class BibTextService:
 
     def delete_all_from_bib_file(self, file_name = None):
         self.rewrite_bib_file([], file_name)
+
+    def get_bibtex_string(self, reference):
+        writer = BibTexWriter()
+        entry = reference.create_bibtex_format()
+
+        return writer.write(entry)
+
+    def get_references_in_bibtex_format(self, references):
+        references_bibtex = []
+
+        for reference in references:
+            references_bibtex.append(self.get_bibtex_string(reference))
+
+        return references_bibtex
 
     def _reference_list_generator(self, references):
         new_references_list = []

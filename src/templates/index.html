@@ -34,18 +34,37 @@
         <button type="button" onclick="searchReferences()">Search</button>
     </form>
 
-    {% for reference in references %}
-    <div class="referenceItem" style="margin-bottom:50px;">
-        <p>Type: {{ reference.type }}</p>
-        <p>Key: {{ reference.key }}</p>
-        <p class="title">Title: {{ reference.title }}</p>
-        <p class="author">Author: {{ reference.author }}</p>
-        <p>Year: {{ reference.year }}</p>
-        <form action="/delete_reference/{{ reference.key }}" method="post">
-            <button type="submit">Delete</button>
-        </form>
-    </div>
-{% endfor %}
+    <form action="/">
+        {% if show_bibtex == "true" %}
+            <input type="hidden" name="show_bibtex" value="false">
+            <button type="submit">Show references as a list</button>
+        {% else %}
+            <input type="hidden" name="show_bibtex" value="true">
+            <button type="submit">Show references as bibtex</button>
+        {% endif %}
+    </form>
+
+    {% if show_bibtex == "true" %}
+        {% for reference_bibtex in references_bibtex %}
+            <div class="referenceBibtex" style="margin-bottom:50px;">
+                <p style="white-space:pre-line;">{{ reference_bibtex }}</p>
+            </div>
+        {% endfor %}
+    {% else %}
+        {% for reference in references %}
+            <div class="referenceItem" style="margin-bottom:50px;">
+                <p>Type: {{ reference.type }}</p>
+                <p>Key: {{ reference.key }}</p>
+                <p class="title">Title: {{ reference.title }}</p>
+                <p class="author">Author: {{ reference.author }}</p>
+                <p>Year: {{ reference.year }}</p>
+                <form action="/delete_reference/{{ reference.key }}" method="post">
+                    <button type="submit">Delete</button>
+                </form>
+            </div>
+        {% endfor %}
+    {% endif %}
+    
 </body>
 </html>
 
