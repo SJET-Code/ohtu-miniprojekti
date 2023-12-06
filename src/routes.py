@@ -38,7 +38,11 @@ def delete_reference(reference_id):
 
 @app.route("/delete_references", methods=["POST"])
 def delete_all_references():
-    bibtex_service.delete_all_from_bib_file()
-    citation_repo.delete_all_citations()
+    try:
+        bibtex_service.delete_all_from_bib_file()
+        citation_repo.delete_all_citations()
+    except Exception as e:
+        print(f"Error deleting references: {e}")
+        
 
     return redirect("/")
