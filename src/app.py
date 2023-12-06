@@ -60,7 +60,7 @@ class BibtexUi:
                 message = 'Write the ID/Key of the article you want to delete or type "DELALL" to delete all:\n'
 
                 try:
-                    self.list_references_by()
+                    self.service.get_search_results()
                     input_type = str(self._io.read(message))
                     self.remove_reference(input_type)
                 except ValueError:
