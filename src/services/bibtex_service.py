@@ -81,3 +81,26 @@ class BibTextService:
                 reference["author"], reference["title"], reference["year"],)
             new_references_list.append(new_reference)
         return new_references_list
+
+    def get_search_results(self, search_term=None, content_type=None, test=False):
+        if test:
+            bibtexdatafile = self.read_from_bib_file('test_references')
+        else:
+            bibtexdatafile = self.read_from_bib_file()
+        if bibtexdatafile == FileNotFoundError:
+            message = "Something went wrong. Probably your .bib file is empty/doesn't exist."
+            return message
+        if len(bibtexdatafile.entries) == 0:
+            return "\nNo Citations Found\n"
+
+        message = "\nFound:\n"
+
+        for reference in bibtexdatafile.entries:
+            if not content_type or (content_type in reference and search_term in reference[content_type]):
+                message += (f"\nID: {reference['ID']}\n"
+                f"Title: {reference['title']}\n"
+                f"Author: {reference['author']}\n"
+                f"Year: {reference['year']}\n"
+                f"Reference type: {reference['ENTRYTYPE']}\n")
+
+        return message

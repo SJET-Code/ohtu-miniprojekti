@@ -46,11 +46,11 @@ class BibtexUi:
                     input_type = int(self._io.read(message))
 
                     if input_type == 5:
-                        self.list_references_by()
+                        self._io.write(self.service.get_search_results())
                         continue
 
                     parameter = self._io.read(f"Type the {ReferenceOption(input_type).name.lower()}:\n")
-                    self.list_references_by(parameter, ReferenceOption(input_type).name.lower())
+                    self._io.write(self.service.get_search_results(parameter, ReferenceOption(input_type).name.lower()))
 
                 except ValueError:
                     message = "Invalid input. Please enter a correct number."
@@ -110,26 +110,3 @@ class BibtexUi:
             self.service.delete_from_bib_file(reference_id, references,'test_references')
         else:
             self.service.delete_from_bib_file(reference_id, references)
-
-    def list_references_by(self, search_term=None, content_type=None):
-        if self._test:
-            bibtexdatafile = self.service.read_from_bib_file('test_references')
-        else:
-            bibtexdatafile = self.service.read_from_bib_file()
-        if bibtexdatafile == FileNotFoundError:
-            message = "Something went wrong. Probably your .bib file is empty/doesn't exist."
-            self._io.write(message)
-            return
-        if len(bibtexdatafile.entries) == 0:
-            self._io.write("\nNo Citations Found\n")
-            return
-
-        self._io.write("\nFound:\n")
-
-        for reference in bibtexdatafile.entries:
-            if not content_type or (content_type in reference and search_term in reference[content_type]):
-                self._io.write(f"\nID: {reference['ID']}\n"
-                f"Title: {reference['title']}\n"
-                f"Author: {reference['author']}\n"
-                f"Year: {reference['year']}\n"
-                f"Reference type: {reference['ENTRYTYPE']}\n")
