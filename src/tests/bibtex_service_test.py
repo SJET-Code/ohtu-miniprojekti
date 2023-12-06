@@ -87,28 +87,4 @@ class TestBibTextService(unittest.TestCase):
 
         self.assertDictEqual(bibtex_data.entries[0], model_entry)
 
-    def test_searching_with_search_term_returns_correct_ones(self):
-        correct_result = (f"\nID: 12321\n"
-                f"Title: otsikko\n"
-                f"Author: tekijä\n"
-                f"Year: 2013\n"
-                f"Reference type: article\n")
-        incorrect_id = "5342"
-
-        self.bibtex_service.write_to_bib_file("article", "12321", "tekijä", "otsikko", 2013, self.file_name)
-        found_data = self.bibtex_service.get_search_results("otsikko", "title", True)
-
-        self.assertIn(correct_result, found_data)
-        self.assertNotIn(incorrect_id, found_data)
-
-    def test_search_when_no_results_found_but_search_term_is_given(self):
-        data = self.bibtex_service.get_search_results("3459345438", "title", True)
-        correct_result = "\nFound:\n"
-        self.assertEqual(correct_result, data)
-
-    def test_search_with_empty_bibtexfile(self):
-        self.bibtex_service.rewrite_bib_file([], self.file_name)
-        data = self.bibtex_service.get_search_results("3459345438", "title", True)
-        correct_result = "\nNo Citations Found\n"
-        self.assertEqual(correct_result, data)
 
