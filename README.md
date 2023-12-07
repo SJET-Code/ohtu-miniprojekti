@@ -1,4 +1,4 @@
-# CiteNinja 🥷🏻
+# [CiteNinja](https://citeninja.fly.dev/) 🥷🏻
 
 ![CI workflow badge](https://github.com/SJET-Code/ohtu-miniprojekti/workflows/CI/badge.svg) [![codecov](https://codecov.io/gh/SJET-Code/ohtu-miniprojekti/graph/badge.svg?token=0199YWM4XZ)](https://codecov.io/gh/SJET-Code/ohtu-miniprojekti)
 
