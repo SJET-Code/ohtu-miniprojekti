@@ -40,3 +40,8 @@ Delete Reference With Key
 Delete All References
     Input  3
     Input  DELALL
+
+Choose To List References By Title
+    Input  2
+    Input  2
+    Input  J.K. Rowling

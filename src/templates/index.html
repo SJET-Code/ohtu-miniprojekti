@@ -23,7 +23,7 @@
     </form>
 
     <h2>References</h2>
-    <div> 
+    <div>
         <form action="/delete_references" method="post" onsubmit="return confirmDelete();">
             <button type="submit">Delete all references</button>
         </form>
@@ -67,7 +67,7 @@
             </div>
         {% endfor %}
     {% endif %}
-    
+
 </body>
 </html>
 
@@ -79,8 +79,18 @@
         $('.referenceItem').each(function () {
             var referenceTitle = $(this).find('.title').text().toLowerCase();
             var referenceAuthor = $(this).find('.author').text().toLowerCase();
+            var yearElement = $(this).find('p:contains("Year")').text().toLocaleLowerCase();
+            var keyElement = $(this).find('p:contains("Key")').text().toLocaleLowerCase();
+            var typeElement = $(this).find('p:contains("Type")').text().toLocaleLowerCase();
 
-            if (referenceTitle.includes(searchTerm) || referenceAuthor.includes(searchTerm)) {
+            if (
+                referenceTitle.includes(searchTerm) ||
+                referenceAuthor.includes(searchTerm) ||
+                yearElement.includes(searchTerm) ||
+                keyElement.includes(searchTerm) ||
+                typeElement.includes(searchTerm)
+            )   {
+
                 $(this).show();
             } else {
                 $(this).hide();

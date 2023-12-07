@@ -31,4 +31,8 @@ Remove All References From List
     Run App And Stop
     Output Should Contain  \nNo Citations Found\n
 
-
+Filter References
+    Add Test Reference Potter
+    Choose To List References By Title
+    Run App And Stop
+    Output Should Contain    \nID: HP1\nTitle: Harry Potter\nAuthor: J.K. Rowling\nYear: 1997\nReference type: book\n
