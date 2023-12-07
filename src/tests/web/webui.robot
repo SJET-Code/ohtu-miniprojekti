@@ -12,7 +12,6 @@ Open WebUi
     Welcome Page Should Be Open
 
 Add Inproceedings Reference
-
     Select From List by Value  id=reference_type  inproceedings
 
     Input Reference  test_key1  test_author  test_title  2023
@@ -40,8 +39,6 @@ Add Book Reference
 
     Wait Until Page Contains Element  xpath=//div[contains(@class,'referenceItem') and .//p[contains(text(),'test_key3')]]
 
-
-
 List All References
     ${reference_count}=  Get Element Count  xpath=//div[contains(@class,'referenceItem')]
 
@@ -62,3 +59,8 @@ Show References As Bibtex
     Click Element  xpath=//button[contains(text(), "Show references as bibtex")]
 
     Wait Until Page Contains Element  xpath=//div[contains(@class,'referenceBibtex') and .//p[contains(text(),'@article{test_key4,')]]
+
+Download References
+    Click Element    xpath=//form[@action="/download_references"]/button[@type="submit"]
+    Wait Until File Exists    ${DOWNLOAD_PATH}${/}references.bib
+    ${file_exists}    File Should Exist    ${DOWNLOAD_PATH}${/}references.bib

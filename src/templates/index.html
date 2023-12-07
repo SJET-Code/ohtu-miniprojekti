@@ -23,11 +23,14 @@
     </form>
 
     <h2>References</h2>
-
-    <form action="/delete_references" method="post" onsubmit="return confirmDelete();">
-        <button type="submit">Delete all references</button>
-    </form>
-
+    <div> 
+        <form action="/delete_references" method="post" onsubmit="return confirmDelete();">
+            <button type="submit">Delete all references</button>
+        </form>
+        <form action="/download_references" method="post">
+            <button type="submit">Download references</button>
+        </form>
+    </div>
     <form id="searchForm">
         <label for="searchTerm">Search: </label>
         <input type="text" id="searchTerm" name="searchTerm">

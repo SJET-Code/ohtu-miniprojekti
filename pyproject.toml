@@ -21,6 +21,7 @@ pytest = "^7.4.3"
 pylint = "^3.0.2"
 coverage = "^7.3.2"
 robotframework-seleniumlibrary = "^6.2.0"
+robotframework-requests = "^0.9.6"
 
 [build-system]
 requires = ["poetry-core"]

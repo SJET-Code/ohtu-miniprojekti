@@ -1,11 +1,14 @@
 *** Settings ***
-Library  ../AppLibrary.py
+Library  ../../AppLibrary.py
 Library  SeleniumLibrary
+Library  ../FileOperations.py
+
 
 *** Variables ***
 ${SERVER}  localhost:5000
 ${DELAY}  0.1 seconds
 ${HOME_URL}  http://${SERVER}
+${DOWNLOAD_PATH}    ${CURDIR}
 
 *** Keywords ***
 Open And Configure Browser
@@ -30,5 +33,11 @@ Input Reference
 
 Submit Reference
     Click Button  Add Reference
+
+Get Bibfile Path 
+    Click Element    xpath=//form[@action="/download_references"]/button[@type="submit"]
+    Wait Until File Exists    ${DOWNLOAD_PATH}${/}references.bib
+    ${file_exists}    File Should Exist    ${DOWNLOAD_PATH}${/}references.bib
+
 
 
