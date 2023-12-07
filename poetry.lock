@@ -939,13 +939,13 @@ selenium = ">=4.3.0"
 
 [[package]]
 name = "selenium"
-version = "4.15.2"
+version = "4.16.0"
 description = ""
 optional = false
 python-versions = ">=3.8"
 files = [
-    {file = "selenium-4.15.2-py3-none-any.whl", hash = "sha256:9e82cd1ac647fb73cf0d4a6e280284102aaa3c9d94f0fa6e6cc4b5db6a30afbf"},
-    {file = "selenium-4.15.2.tar.gz", hash = "sha256:22eab5a1724c73d51b240a69ca702997b717eee4ba1f6065bf5d6b44dba01d48"},
+    {file = "selenium-4.16.0-py3-none-any.whl", hash = "sha256:aec71f4e6ed6cb3ec25c9c1b5ed56ae31b6da0a7f17474c7566d303f84e6219f"},
+    {file = "selenium-4.16.0.tar.gz", hash = "sha256:b2e987a445306151f7be0e6dfe2aa72a479c2ac6a91b9d5ef2d6dd4e49ad0435"},
 ]
 
 [package.dependencies]
@@ -1172,8 +1172,4 @@ h11 = ">=0.9.0,<1"
 [metadata]
 lock-version = "2.0"
 python-versions = "^3.11"
-<<<<<<< HEAD
-content-hash = "862bc9a8d9e5dfdd56e55bde1c545d23f77215ccbcd4adb69f8d2be032b0394d"
-=======
-content-hash = "37cc5c83d8a1a11ed2e363042a8d48d5ebec9604ee3928a2cbe6815245bb6316"
->>>>>>> 8dccb99 (deployment to fly.io)
+content-hash = "59fee84c4891a4370841e4c407011e6f96f9bc5f30e502df1b756939c952c935"
