@@ -14,4 +14,4 @@ Open WebUi
 Login With Correct Credentials
     Input User  admin  password
     Submit Login
-    Title Should Be  Bibtex Web App
+    Title Should Be  CiteNinja

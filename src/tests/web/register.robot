@@ -14,4 +14,4 @@ Open WebUi
 Register With Correct Credentials
     Input User  testi  testiman123
     Submit Register
-    Title Should Be  Bibtex Web App
+    Title Should Be  CiteNinja

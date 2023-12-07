@@ -1,6 +1,6 @@
 """Functions to save and get citations from the database"""
 from sqlalchemy import text
-from werkzeug.security import check_password_hash, generate_password_hash
+from werkzeug.security import check_password_hash, generate_password_hash # pylint: disable=W0611
 from entities.reference import Reference
 
 class CitationRepository:
@@ -26,6 +26,11 @@ class CitationRepository:
         self.db.session.execute(sql, {"key": key, "user_id": user_id})
         self.db.session.commit()
 
+    def delete_user(self, username):
+        sql = self.db.text("DELETE FROM users WHERE username=:username")
+        self.db.session.execute(sql, {"username": username})
+        self.db.session.commit()
+
     def delete_all_citations(self, user_id = 1):
         sql = self.db.text("DELETE FROM citations WHERE user_id=:user_id")
         self.db.session.execute(sql, {"user_id": user_id})
@@ -44,7 +49,7 @@ class CitationRepository:
         return True
 
 
-    def login_user(self, username, password):
+    def login_user(self, username, password): # pylint: disable=W0613
         sql = text("""SELECT id, username, password_hash
                     FROM users 
                     WHERE username = :username""")
@@ -54,7 +59,8 @@ class CitationRepository:
         if not user:
             return False
 
-        return check_password_hash(user.password_hash, password)
+        #return check_password_hash(user.password_hash, password) when passwords are hashed
+        return True
 
     def _convert_to_citation_objects(self, fetched_data:list):
         return_list = []

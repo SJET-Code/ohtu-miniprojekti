@@ -64,3 +64,7 @@ Download References
     Click Element    xpath=//form[@action="/download_references"]/button[@type="submit"]
     Wait Until File Exists    ${DOWNLOAD_PATH}${/}references.bib
     ${file_exists}    File Should Exist    ${DOWNLOAD_PATH}${/}references.bib
+
+Website can be accessed
+    Go To Website
+    Welcome Page Should Be Open

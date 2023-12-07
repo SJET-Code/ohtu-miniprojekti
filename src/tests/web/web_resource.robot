@@ -9,6 +9,7 @@ ${SERVER}  localhost:5000
 ${DELAY}  0.1 seconds
 ${HOME_URL}  http://${SERVER}
 ${DOWNLOAD_PATH}    ${CURDIR}
+${WEB_URL}  https://citeninja.fly.dev/
 
 *** Keywords ***
 Open And Configure Browser
@@ -18,7 +19,7 @@ Open And Configure Browser
     Open Browser  browser=chrome  options=${options}
     Set Selenium Speed  ${DELAY}
 Welcome Page Should Be Open
-    Title Should Be  Bibtex Web App
+    Title Should Be  CiteNinja
 
 Go To Main Page
     Go To  ${HOME_URL}
@@ -39,5 +40,6 @@ Get Bibfile Path
     Wait Until File Exists    ${DOWNLOAD_PATH}${/}references.bib
     ${file_exists}    File Should Exist    ${DOWNLOAD_PATH}${/}references.bib
 
-
-
+Go To Website
+    Go To  ${WEB_URL}
+    Title Should Be  CiteNinja

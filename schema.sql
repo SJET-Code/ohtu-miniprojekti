@@ -3,7 +3,7 @@ DROP TABLE citations CASCADE;
 
 CREATE TABLE users (
     id SERIAL PRIMARY KEY,
-    username TEXT UNIQUE,
+    username TEXT,
     password_hash TEXT
 );
 CREATE TABLE citations (
@@ -17,3 +17,4 @@ CREATE TABLE citations (
 );
 
 INSERT INTO users (username, password_hash) VALUES ('admin', 'password');
+\q
