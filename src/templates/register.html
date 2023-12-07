@@ -1,0 +1,15 @@
+
+{% block content %}
+
+<title>Register</title>
+<form action="/register" method="POST">
+    <h2>New user</h2>
+    <p>
+        Username: <input type="text" name="username" value="{{name}}" maxlength="20" required> 
+    </p>
+    <p>
+        Password: <input type="password" name="password_hash" maxlength="20"  required>
+    </p>
+    <input type="submit" class="button" value="register">
+</form>
+{% endblock %}

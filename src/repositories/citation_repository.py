@@ -1,4 +1,5 @@
 """Functions to save and get citations from the database"""
+from sqlalchemy import text
 from entities.reference import Reference
 
 class CitationRepository:
@@ -32,8 +33,24 @@ class CitationRepository:
     def create_user(self, username, password_hash):
         sql = self.db.text("""INSERT INTO users (username, password_hash)
                 VALUES (:username, :password_hash)""")
-        self.db.session.execute(sql, {"username": username, "password_hash": password_hash})
+        result = self.db.session.execute(sql, {"username": username, "password_hash": password_hash})
+        if not result:
+            return False
         self.db.session.commit()
+        return True
+
+
+    #add werkzeug.security for hash?
+    def login_user(self, username, password_hash):
+        sql = text("""SELECT id, username, password_hash
+                    FROM users 
+                    WHERE username = :username AND password_hash = :password_hash""")
+        result = self.db.session.execute(sql, {"username": username, "password_hash": password_hash})
+        user = result.fetchone()
+
+        if not user:
+            return False
+        return True
 
     def _convert_to_citation_objects(self, fetched_data:list):
         return_list = []

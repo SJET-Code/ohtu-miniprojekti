@@ -1,0 +1,15 @@
+{% block content %}
+
+
+<title>Login</title>
+<form action="/login" method="POST">
+    <h1>Login</h1>
+    <p> 
+        username: <input type="text" name="username">
+    </p>
+    <p>
+        Password: <input type="password" name="password_hash">
+    </p>
+    <input type="submit" class="button" value="login">
+</form>
+{% endblock %}
