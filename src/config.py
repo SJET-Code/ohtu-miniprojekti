@@ -9,3 +9,8 @@ except FileNotFoundError:
     pass
 
 DATABASE_URL = os.getenv("DATABASE_URL") or "postgresql://localhost"
+
+if DATABASE_URL[7:10] != 'sql':
+    DATABASE_URL = DATABASE_URL[:8] + 'ql' + DATABASE_URL[8:]
+
+print(DATABASE_URL)
