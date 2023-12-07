@@ -31,5 +31,4 @@ Remove All References From List
     Run App And Stop
     Output Should Contain  \nNo Citations Found\n
 
-    
-    
+

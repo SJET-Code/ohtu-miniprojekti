@@ -86,3 +86,5 @@ class TestBibTextService(unittest.TestCase):
         bibtex_data = self.bibtex_service.read_from_bib_file(self.file_name)
 
         self.assertDictEqual(bibtex_data.entries[0], model_entry)
+
+
