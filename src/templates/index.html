@@ -37,6 +37,12 @@
         <button type="button" onclick="searchReferences()">Search</button>
     </form>
 
+    <form action="/get_doi" method="get">
+        <label for="doiInput">Input DOI</label>
+        <input type="text" id="doiInput" name="doiInput">
+        <button type="submit">Find</button>
+    </form>
+
     <form action="/">
         {% if show_bibtex == "true" %}
             <input type="hidden" name="show_bibtex" value="false">

@@ -71,7 +71,7 @@ class TestBibTextService(unittest.TestCase):
 
     def test_deleting_one_reference_does_not_delete_others(self):
         model_entry = {
-            "title": 'ghi',
+            "title": "ghi",
             "author": "def",
             "year": "2013",
             "ENTRYTYPE": "article",
@@ -87,4 +87,30 @@ class TestBibTextService(unittest.TestCase):
 
         self.assertDictEqual(bibtex_data.entries[0], model_entry)
 
+    def test_adding_reference_with_correct_doi(self):
+        model_entry = {
+            "title": "Gold‐Catalyzed Cycloisomerization of Sulfur Ylides to Dihydrobenzothiepines",
+            "author": "Knittl‐Frank, Christian and Saridakis, Iakovos and Stephens, Thomas and Gomes, Rafael and Neuhaus, James and Misale, Antonio and Oost, Rik and Oppedisano, Alberto and Maulide, Nuno",
+            "year": "2020",
+            "ENTRYTYPE": "article",
+            "ID": "Knittl_Frank_2020"
+        }
+
+        doi = "10.1002/chem.202000622"
+
+        data = self.bibtex_service.get_bibtex_data_from_doi(doi)
+
+        self.bibtex_service.write_to_bib_file(data['type'], data['key'], data['author'], data['title'], data['year'], self.file_name)
+
+        bibtex_data = self.bibtex_service.read_from_bib_file(self.file_name)
+
+        self.assertDictEqual(bibtex_data.entries[1], model_entry)
+
+    def test_adding_reference_with_incorrect_doi(self):
+        doi = "invalid-doi"
+        self.assertIsNone(self.bibtex_service.get_bibtex_data_from_doi(doi))
+
+        bibtex_data = self.bibtex_service.read_from_bib_file(self.file_name)
+
+        self.assertEqual(len(bibtex_data.entries), 1)
 

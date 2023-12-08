@@ -35,7 +35,7 @@ Input Reference
 Submit Reference
     Click Button  Add Reference
 
-Get Bibfile Path 
+Get Bibfile Path
     Click Element    xpath=//form[@action="/download_references"]/button[@type="submit"]
     Wait Until File Exists    ${DOWNLOAD_PATH}${/}references.bib
     ${file_exists}    File Should Exist    ${DOWNLOAD_PATH}${/}references.bib
@@ -43,3 +43,11 @@ Get Bibfile Path
 Go To Website
     Go To  ${WEB_URL}
     Title Should Be  CiteNinja
+
+Submit Doi
+    Click Button  Find
+
+Input Doi
+    [Arguments]  ${doi}
+    Input Text  name=doiInput  ${doi}
+

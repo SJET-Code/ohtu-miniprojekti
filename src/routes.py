@@ -102,3 +102,12 @@ def login():
         return redirect("/login")
             #return error("Wrong username or password", "login")
     return redirect("/")
+
+@app.route('/get_doi', methods=["GET"])
+def doi():
+    doi_input = request.args.get('doiInput')
+    data = bibtex_service.get_bibtex_data_from_doi(doi_input)
+    if data:
+        citation_repo.create_citation(data['type'], data['key'], data['author'], data['title'], data['year'])
+        bibtex_service.write_to_bib_file(data['type'], data['key'], data['author'], data['title'], data['year'])
+    return redirect ("/")

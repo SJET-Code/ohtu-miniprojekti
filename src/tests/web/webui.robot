@@ -20,7 +20,7 @@ Add Inproceedings Reference
 
     Wait Until Page Contains Element  xpath=//div[contains(@class,'referenceItem') and .//p[contains(text(),'test_key1')]]
 
-Add Article Reference 
+Add Article Reference
 
     Select From List by Value  id=reference_type  article
     Input Reference  test_key2  test_author  test_title  2023
@@ -46,7 +46,7 @@ List All References
 
 Remove Reference
     Set Selenium Implicit Wait  1s
-    
+
     Click Element  xpath=//div[contains(@class,'referenceItem') and .//p[contains(text(),'test_key1')]]//button
     Click Element  xpath=//div[contains(@class,'referenceItem') and .//p[contains(text(),'test_key2')]]//button
     Click Element  xpath=//div[contains(@class,'referenceItem') and .//p[contains(text(),'test_key3')]]//button
@@ -68,3 +68,8 @@ Download References
 Website can be accessed
     Go To Website
     Welcome Page Should Be Open
+
+Add Reference With Doi
+    Input Doi    10.1002/chem.202000622
+    Submit Doi
+    Wait Until Page Contains Element  xpath=//div[contains(@class,'referenceItem') and .//p[contains(text(),'Knittl_Frank_2020')]]
