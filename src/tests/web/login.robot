@@ -1,8 +1,8 @@
 *** Settings ***
 Resource  login_resource.robot
 
-Suite Setup  Open And Configure Browser
-Suite Teardown  Close Browser
+Suite Setup  Run Keywords  Open And Configure Browser  Create Test User
+Suite Teardown  Run Keywords  Delete Test User  Close Browser
 Test Setup  Go To Login Page
 
 *** Test Cases ***
@@ -12,6 +12,6 @@ Open WebUi
     Welcome Page Should Be Open
 
 Login With Correct Credentials
-    Input User  admin  password
+    Input User  test_user123  test_password
     Submit Login
     Title Should Be  CiteNinja

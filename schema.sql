@@ -2,7 +2,7 @@ DROP TABLE users CASCADE;
 DROP TABLE citations CASCADE;
 
 CREATE TABLE users (
-    id SERIAL PRIMARY KEY,
+    id SERIAL PRIMARY KEY UNIQUE,
     username TEXT,
     password_hash TEXT
 );
@@ -15,6 +15,3 @@ CREATE TABLE citations (
     title TEXT,
     year INTEGER
 );
-
-INSERT INTO users (username, password_hash) VALUES ('admin', 'password');
-\q

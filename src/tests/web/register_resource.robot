@@ -29,8 +29,14 @@ Submit Register
 Go To Main Page
     Go To  ${HOME_URL}
 
+Login Page Should Be Open
+    Title Should Be  Login
+
 Input User
     [Arguments]    ${username}    ${password}
     Input Text     name=username    ${username}
     Input Password    name=password_hash    ${password}
 
+Delete User
+    Go To  ${HOME_URL}/delete_user
+    Login Page Should Be Open

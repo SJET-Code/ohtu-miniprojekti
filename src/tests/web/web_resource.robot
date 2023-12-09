@@ -10,6 +10,9 @@ ${DELAY}  0.1 seconds
 ${HOME_URL}  http://${SERVER}
 ${DOWNLOAD_PATH}    ${CURDIR}
 ${WEB_URL}  https://citeninja.fly.dev/
+${REGISTER_URL}  ${HOME_URL}/register
+${LOGIN_URL}  ${HOME_URL}/login
+${DELETE_USER_URL}  ${HOME_URL}/delete_user
 
 *** Keywords ***
 Open And Configure Browser
@@ -18,8 +21,12 @@ Open And Configure Browser
     Call Method  ${options}  add_argument  --headless
     Open Browser  browser=chrome  options=${options}
     Set Selenium Speed  ${DELAY}
+
 Welcome Page Should Be Open
     Title Should Be  CiteNinja
+
+Login Page Should Be Open
+    Title Should Be  Login
 
 Go To Main Page
     Go To  ${HOME_URL}
@@ -42,7 +49,12 @@ Get Bibfile Path
 
 Go To Website
     Go To  ${WEB_URL}
-    Title Should Be  CiteNinja
+
+Go To Register Page
+    Go To  ${REGISTER_URL}
+
+Go To Login Page
+    Go To  ${LOGIN_URL}
 
 Submit Doi
     Click Button  Find
@@ -51,3 +63,12 @@ Input Doi
     [Arguments]  ${doi}
     Input Text  name=doiInput  ${doi}
 
+Create Test User And Login
+    Go To Register Page
+    Input Text     name=username    test_user123
+    Input Password    name=password_hash    test_password
+    Click Button  register
+    Go To Main Page
+
+Delete Test User
+    Go To  ${DELETE_USER_URL}
