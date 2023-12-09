@@ -3,124 +3,130 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="{{url_for('static',filename='styles/style.css')}}" type="text/css">
     <title>CiteNinja</title>
 </head>
 <body>
-    <h1>CiteNinja</h1>
-    <div>
-        <form action="/logout" method="get">
-            <button type="submit">Logout</button>
-        </form>
-        <form action="/delete_user" method="get" onsubmit="return confirmUserDelete();">
-            <button type="submit">Delete user</button>
-        </form>
+    <div class="banner-container">
+        <img src="{{url_for('static',filename='images/banner.png')}}" alt="CiteNinja Banner with ninjas citing all sorts of things"/>
     </div>
-
-    <h2>Add reference</h2>
-    <form action="/add_reference" method="post">
-        <label for="reference_type">Choose reference type:</label>
-        <select id="reference_type" name="reference_type">
-            <option value="inproceedings">Inproceedings</option>
-            <option value="article">Article</option>
-            <option value="book">Book</option>
-        </select>
-        <input placeholder="Reference key" name="ID"/>
-        <input placeholder="Author" name="author"/>
-        <input placeholder="Title" name="title"/>
-        <input placeholder="Year" name="year"/>
-        <button type="submit">Add Reference</button>
-    </form>
-
-    <h2>References</h2>
-    <div>
-        <form action="/delete_references" method="post" onsubmit="return confirmDelete();">
-            <button type="submit">Delete all references</button>
+    <div class="container">
+        <div class="user-actions">
+            <form action="/logout" method="get">
+                <button type="submit">Logout</button>
+            </form>
+            <form action="/delete_user" method="get" onsubmit="return confirmUserDelete();">
+                <button type="submit">Delete user</button>
+            </form>
+        </div>
+        <h2>Add reference</h2>
+        <form action="/add_reference" method="post">
+            <label for="reference_type">Choose reference type:</label>
+            <select id="reference_type" name="reference_type">
+                <option value="inproceedings">Inproceedings</option>
+                <option value="article">Article</option>
+                <option value="book">Book</option>
+            </select>
+            <input placeholder="Reference key" name="ID"/>
+            <input placeholder="Author" name="author"/>
+            <input placeholder="Title" name="title"/>
+            <input placeholder="Year" name="year"/>
+            <button type="submit">Add Reference</button>
         </form>
-        <form action="/download_references" method="post">
-            <button type="submit">Download references</button>
+    
+        <h2>References</h2>
+        <div>
+            <form action="/delete_references" method="post" onsubmit="return confirmDelete();">
+                <button type="submit">Delete all references</button>
+            </form>
+            <form action="/download_references" method="post">
+                <button type="submit">Download references</button>
+            </form>
+        </div>
+        <form id="searchForm">
+            <label for="searchTerm">Search: </label>
+            <input type="text" id="searchTerm" name="searchTerm">
+            <button type="button" onclick="searchReferences()">Search</button>
         </form>
-    </div>
-    <form id="searchForm">
-        <label for="searchTerm">Search: </label>
-        <input type="text" id="searchTerm" name="searchTerm">
-        <button type="button" onclick="searchReferences()">Search</button>
-    </form>
-
-    <form action="/get_doi" method="get">
-        <label for="doiInput">Input DOI</label>
-        <input type="text" id="doiInput" name="doiInput">
-        <button type="submit">Find</button>
-    </form>
-
-    <form action="/">
+    
+        <form action="/get_doi" method="get">
+            <label for="doiInput">Input DOI</label>
+            <input type="text" id="doiInput" name="doiInput">
+            <button type="submit">Find</button>
+        </form>
+    
+        <form action="/">
+            {% if show_bibtex == "true" %}
+                <input type="hidden" name="show_bibtex" value="false">
+                <button type="submit">Show references as a list</button>
+            {% else %}
+                <input type="hidden" name="show_bibtex" value="true">
+                <button type="submit">Show references as bibtex</button>
+            {% endif %}
+        </form>
+    
         {% if show_bibtex == "true" %}
-            <input type="hidden" name="show_bibtex" value="false">
-            <button type="submit">Show references as a list</button>
+            {% for reference_bibtex in references_bibtex %}
+                <div class="referenceBibtex">
+                    <p style="white-space:pre-line;">{{ reference_bibtex }}</p>
+                </div>
+            {% endfor %}
         {% else %}
-            <input type="hidden" name="show_bibtex" value="true">
-            <button type="submit">Show references as bibtex</button>
+            {% for reference in references %}
+                <div class="referenceItem">
+                    <p>Type: {{ reference.type }}</p>
+                    <p>Key: {{ reference.key }}</p>
+                    <p class="title">Title: {{ reference.title }}</p>
+                    <p class="author">Author: {{ reference.author }}</p>
+                    <p>Year: {{ reference.year }}</p>
+                    <form action="/delete_reference/{{ reference.key }}" method="post">
+                        <button type="submit">Delete</button>
+                    </form>
+                </div>
+            {% endfor %}
         {% endif %}
-    </form>
-
-    {% if show_bibtex == "true" %}
-        {% for reference_bibtex in references_bibtex %}
-            <div class="referenceBibtex" style="margin-bottom:50px;">
-                <p style="white-space:pre-line;">{{ reference_bibtex }}</p>
-            </div>
-        {% endfor %}
-    {% else %}
-        {% for reference in references %}
-            <div class="referenceItem" style="margin-bottom:50px;">
-                <p>Type: {{ reference.type }}</p>
-                <p>Key: {{ reference.key }}</p>
-                <p class="title">Title: {{ reference.title }}</p>
-                <p class="author">Author: {{ reference.author }}</p>
-                <p>Year: {{ reference.year }}</p>
-                <form action="/delete_reference/{{ reference.key }}" method="post">
-                    <button type="submit">Delete</button>
-                </form>
-            </div>
-        {% endfor %}
-    {% endif %}
-
+    
+    </body>
+    </html>
+    
+    <script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
+    <script>
+        function searchReferences() {
+            var searchTerm = $('#searchTerm').val().toLowerCase();
+    
+            $('.referenceItem').each(function () {
+                var referenceTitle = $(this).find('.title').text().toLowerCase();
+                var referenceAuthor = $(this).find('.author').text().toLowerCase();
+                var yearElement = $(this).find('p:contains("Year")').text().toLocaleLowerCase();
+                var keyElement = $(this).find('p:contains("Key")').text().toLocaleLowerCase();
+                var typeElement = $(this).find('p:contains("Type")').text().toLocaleLowerCase();
+    
+                if (
+                    referenceTitle.includes(searchTerm) ||
+                    referenceAuthor.includes(searchTerm) ||
+                    yearElement.includes(searchTerm) ||
+                    keyElement.includes(searchTerm) ||
+                    typeElement.includes(searchTerm)
+                )   {
+    
+                    $(this).show();
+                } else {
+                    $(this).hide();
+                }
+            });
+        }
+    </script>
+    
+    <script>
+        function confirmDelete() {
+            var result = confirm("Are you sure you want to delete all references?");
+            return result;
+        }
+        function confirmUserDelete() {
+            var result = confirm("Are you sure you want to delete this account? All saved citations will be lost.");
+            return result;
+        }
+    </script>
+    </div>
 </body>
 </html>
-
-<script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
-<script>
-    function searchReferences() {
-        var searchTerm = $('#searchTerm').val().toLowerCase();
-
-        $('.referenceItem').each(function () {
-            var referenceTitle = $(this).find('.title').text().toLowerCase();
-            var referenceAuthor = $(this).find('.author').text().toLowerCase();
-            var yearElement = $(this).find('p:contains("Year")').text().toLocaleLowerCase();
-            var keyElement = $(this).find('p:contains("Key")').text().toLocaleLowerCase();
-            var typeElement = $(this).find('p:contains("Type")').text().toLocaleLowerCase();
-
-            if (
-                referenceTitle.includes(searchTerm) ||
-                referenceAuthor.includes(searchTerm) ||
-                yearElement.includes(searchTerm) ||
-                keyElement.includes(searchTerm) ||
-                typeElement.includes(searchTerm)
-            )   {
-
-                $(this).show();
-            } else {
-                $(this).hide();
-            }
-        });
-    }
-</script>
-
-<script>
-    function confirmDelete() {
-        var result = confirm("Are you sure you want to delete all references?");
-        return result;
-    }
-    function confirmUserDelete() {
-        var result = confirm("Are you sure you want to delete this account? All saved citations will be lost.");
-        return result;
-    }
-</script>

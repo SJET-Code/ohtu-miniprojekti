@@ -1,11 +1,19 @@
-{% block content %}
-
-
-<title>Login</title>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="{{url_for('static',filename='styles/style.css')}}" type="text/css">
+    <title>Login</title>
+</head>
+<body>
+    <div class="banner-container">
+        <img src="{{url_for('static',filename='images/banner.png')}}" alt="CiteNinja Banner with ninjas citing all sorts of things"/>
+    </div>
 <form action="/login" method="POST">
     <h1>Login</h1>
     <p> 
-        username: <input type="text" name="username">
+        Username: <input type="text" name="username">
     </p>
     <p>
         Password: <input type="password" name="password_hash">
@@ -14,4 +22,6 @@
 </form>
 <form action="/register" method="get">
     <button type="submit">Register</button>
-{% endblock %}
+
+</body>
+</html>
