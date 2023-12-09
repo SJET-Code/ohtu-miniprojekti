@@ -48,6 +48,8 @@ jobs:
       - name: Lint
         run: poetry run pylint src
       - name: Run robot tests
+        env:
+          SECRET_KEY: ${{ secrets.SECRET_KEY }}
         run: bash run_robot_tests.sh
       - name: Run coverage tests
         run: poetry run invoke cov
