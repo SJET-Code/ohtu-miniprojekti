@@ -22,3 +22,5 @@ Tekstikäyttöliittymä `poetry run invoke start`
 
 
 ## [Definition of Done kriteerit](./documents/DoD.md)
+
+
