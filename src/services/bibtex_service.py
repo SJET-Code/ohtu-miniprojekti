@@ -49,11 +49,7 @@ class BibTextService:
         return bibtexdatafile
 
     def delete_from_bib_file(self, reference_id, references, file_name = None):
-        copyreferencelist = []
-
-        for value in references.entries:
-            if value.get("ID") != reference_id:
-                copyreferencelist.append(value)
+        copyreferencelist = [value for value in references.entries if value.get("ID") != reference_id]
 
         bibtex_reference_list = self._reference_list_generator(copyreferencelist)
         self.rewrite_bib_file(bibtex_reference_list, file_name)
