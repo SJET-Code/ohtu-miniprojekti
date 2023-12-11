@@ -30,10 +30,16 @@
             <input placeholder="Reference key" name="ID"/>
             <input placeholder="Author" name="author"/>
             <input placeholder="Title" name="title"/>
-            <input placeholder="Year" name="year"/>
+            <input placeholder="Year" name="year" type="number"/>
             <button type="submit">Add Reference</button>
         </form>
-    
+
+        <form action="/get_doi" method="get">
+            <label for="doiInput">Add reference with DOI-code:</label>
+            <input type="text" id="doiInput" name="doiInput">
+            <button type="submit">Find</button>
+        </form>
+
         <h2>References</h2>
         <div>
             <form action="/delete_references" method="post" onsubmit="return confirmDelete();">
@@ -48,13 +54,7 @@
             <input type="text" id="searchTerm" name="searchTerm">
             <button type="button" onclick="searchReferences()">Search</button>
         </form>
-    
-        <form action="/get_doi" method="get">
-            <label for="doiInput">Input DOI</label>
-            <input type="text" id="doiInput" name="doiInput">
-            <button type="submit">Find</button>
-        </form>
-    
+
         <form action="/">
             {% if show_bibtex == "true" %}
                 <input type="hidden" name="show_bibtex" value="false">
@@ -64,7 +64,7 @@
                 <button type="submit">Show references as bibtex</button>
             {% endif %}
         </form>
-    
+
         {% if show_bibtex == "true" %}
             {% for reference_bibtex in references_bibtex %}
                 <div class="referenceBibtex">
@@ -74,33 +74,33 @@
         {% else %}
             {% for reference in references %}
                 <div class="referenceItem">
-                    <p>Type: {{ reference.type }}</p>
-                    <p>Key: {{ reference.key }}</p>
-                    <p class="title">Title: {{ reference.title }}</p>
-                    <p class="author">Author: {{ reference.author }}</p>
-                    <p>Year: {{ reference.year }}</p>
+                    <p><b>Type:</b> {{ reference.type }}</p>
+                    <p><b>Key:</b> {{ reference.key }}</p>
+                    <p class="title"><b>Title:</b> {{ reference.title }}</p>
+                    <p class="author"><b>Author:</b> {{ reference.author }}</p>
+                    <p><b>Year:</b> {{ reference.year }}</p>
                     <form action="/delete_reference/{{ reference.key }}" method="post">
                         <button type="submit">Delete</button>
                     </form>
                 </div>
             {% endfor %}
         {% endif %}
-    
+
     </body>
     </html>
-    
+
     <script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
     <script>
         function searchReferences() {
             var searchTerm = $('#searchTerm').val().toLowerCase();
-    
+
             $('.referenceItem').each(function () {
                 var referenceTitle = $(this).find('.title').text().toLowerCase();
                 var referenceAuthor = $(this).find('.author').text().toLowerCase();
                 var yearElement = $(this).find('p:contains("Year")').text().toLocaleLowerCase();
                 var keyElement = $(this).find('p:contains("Key")').text().toLocaleLowerCase();
                 var typeElement = $(this).find('p:contains("Type")').text().toLocaleLowerCase();
-    
+
                 if (
                     referenceTitle.includes(searchTerm) ||
                     referenceAuthor.includes(searchTerm) ||
@@ -108,7 +108,7 @@
                     keyElement.includes(searchTerm) ||
                     typeElement.includes(searchTerm)
                 )   {
-    
+
                     $(this).show();
                 } else {
                     $(this).hide();
@@ -116,7 +116,7 @@
             });
         }
     </script>
-    
+
     <script>
         function confirmDelete() {
             var result = confirm("Are you sure you want to delete all references?");

@@ -89,18 +89,25 @@ class TestBibTextService(unittest.TestCase):
 
     def test_adding_reference_with_correct_doi(self):
         model_entry = {
-            "title": "Gold‐Catalyzed Cycloisomerization of Sulfur Ylides to Dihydrobenzothiepines",
-            "author": "Knittl‐Frank, Christian and Saridakis, Iakovos and Stephens, Thomas and Gomes, Rafael and Neuhaus, James and Misale, Antonio and Oost, Rik and Oppedisano, Alberto and Maulide, Nuno",
-            "year": "2020",
+            "title": "A Quick Introduction to Version Control with Git and GitHub",
+            "author": "Blischak, John D. and Davenport, Emily R. and Wilson, Greg",
+            "year": "2016",
             "ENTRYTYPE": "article",
-            "ID": "Knittl_Frank_2020"
+            "ID": "Blischak_2016"
         }
 
-        doi = "10.1002/chem.202000622"
+        doi = "10.1371/journal.pcbi.1004668"
 
         data = self.bibtex_service.get_bibtex_data_from_doi(doi)
 
-        self.bibtex_service.write_to_bib_file(data['type'], data['key'], data['author'], data['title'], data['year'], self.file_name)
+        self.bibtex_service.write_to_bib_file(
+            data['type'],
+            data['key'],
+            data['author'],
+            data['title'],
+            data['year'],
+            self.file_name
+        )
 
         bibtex_data = self.bibtex_service.read_from_bib_file(self.file_name)
 

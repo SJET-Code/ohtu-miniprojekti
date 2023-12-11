@@ -86,15 +86,23 @@ class BibTextService:
         author = entry.get('author', '')
         title = entry.get('title', '')
         year = entry.get('year', '')
-        return {"type": entrytype, "key": key, "author": author, "title": title, "year": year}
+        return {
+            "type": entrytype,
+            "key": key,
+            "author": author,
+            "title": title,
+            "year": year
+        }
 
     def _doi_request(self, doi_input):
+        if not doi_input:
+            return None
         url =  "http://dx.doi.org/" + doi_input
         headers = {"accept": "application/x-bibtex"}
         timeout_seconds = 5
-        r = requests.get(url, headers=headers, timeout=timeout_seconds)
-        if r.status_code == 200:
-            bib_data = r.text
+        request = requests.get(url, headers=headers, timeout=timeout_seconds)
+        if request.status_code == 200:
+            bib_data = request.text
             parser = BibTexParser()
             bib_database = bibtexparser.loads(bib_data, parser=parser)
             entry = bib_database.entries[0]

@@ -122,6 +122,12 @@ def doi():
         doi_input = request.args.get('doiInput')
         data = bibtex_service.get_bibtex_data_from_doi(doi_input)
         if data:
-            citation_repo.create_citation(data['type'], data['key'], data['author'], data['title'], data['year'],
-                                          user_repo.user_id())
+            citation_repo.create_citation(
+                data['type'],
+                data['key'],
+                data['author'],
+                data['title'],
+                data['year'],
+                user_repo.user_id()
+            )
     return redirect ("/")
