@@ -1,7 +1,15 @@
-
-{% block content %}
-
-<title>Register</title>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="{{url_for('static',filename='styles/style.css')}}" type="text/css">
+    <title>Register</title>
+</head>
+<body>
+    <div class="banner-container">
+        <img src="{{url_for('static',filename='images/banner.png')}}" alt="CiteNinja Banner with ninjas citing all sorts of things"/>
+    </div>
 <form action="/register" method="POST">
     <h2>New user</h2>
     <p>
@@ -12,4 +20,8 @@
     </p>
     <input type="submit" class="button" value="register">
 </form>
-{% endblock %}
+<form action="/login" method="get">
+    <button type="submit">Login</button>
+
+</body>
+</html>

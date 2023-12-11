@@ -1,5 +1,7 @@
 *** Settings ***
 Library  ../AppLibrary.py
+Library    SeleniumLibrary
+Library    Process
 
 *** Keywords ***
 Reset
@@ -23,9 +25,11 @@ Run App And Stop
 Go To Input Article
     Input  1
     Input  2
+    Input  2
 
 Go To Input Book
     Input  1
+    Input  2
     Input  3
 
 Choose To List All References
@@ -45,3 +49,12 @@ Choose To List References By Title
     Input  2
     Input  2
     Input  J.K. Rowling
+
+Go To Input DOI
+    Input  1
+    Input  1
+
+Input Doi
+    [Arguments]  ${doi}
+    Input  ${doi}
+    Sleep  5s

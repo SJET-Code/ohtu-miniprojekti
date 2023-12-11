@@ -2,13 +2,14 @@
 Resource  web_resource.robot
 
 Suite Setup  Open And Configure Browser
-Suite Teardown  Close Browser
+Suite Teardown  Run Keywords  Delete Test User  Close Browser
 Test Setup  Go To Main Page
 
 *** Test Cases ***
 Open WebUi
     Open And Configure Browser
     Go To Main Page
+    Create Test User And Login
     Welcome Page Should Be Open
 
 Add Inproceedings Reference
@@ -20,7 +21,7 @@ Add Inproceedings Reference
 
     Wait Until Page Contains Element  xpath=//div[contains(@class,'referenceItem') and .//p[contains(text(),'test_key1')]]
 
-Add Article Reference 
+Add Article Reference
 
     Select From List by Value  id=reference_type  article
     Input Reference  test_key2  test_author  test_title  2023
@@ -46,7 +47,7 @@ List All References
 
 Remove Reference
     Set Selenium Implicit Wait  1s
-    
+
     Click Element  xpath=//div[contains(@class,'referenceItem') and .//p[contains(text(),'test_key1')]]//button
     Click Element  xpath=//div[contains(@class,'referenceItem') and .//p[contains(text(),'test_key2')]]//button
     Click Element  xpath=//div[contains(@class,'referenceItem') and .//p[contains(text(),'test_key3')]]//button
@@ -59,6 +60,8 @@ Show References As Bibtex
     Click Element  xpath=//button[contains(text(), "Show references as bibtex")]
 
     Wait Until Page Contains Element  xpath=//div[contains(@class,'referenceBibtex') and .//p[contains(text(),'@article{test_key4,')]]
+    Click Element  xpath=//button[contains(text(), "Show references as a list")]
+    Click Element  xpath=//div[contains(@class,'referenceItem') and .//p[contains(text(),'test_key4')]]//button
 
 Download References
     Click Element    xpath=//form[@action="/download_references"]/button[@type="submit"]
@@ -67,4 +70,10 @@ Download References
 
 Website can be accessed
     Go To Website
-    Welcome Page Should Be Open
+    Login Page Should Be Open
+
+Add Reference With Doi
+    Input Doi    10.1002/chem.202000622
+    Submit Doi
+    Wait Until Page Contains Element  xpath=//div[contains(@class,'referenceItem') and .//p[contains(text(),'Knittl_Frank_2020')]]
+    Click Element  xpath=//div[contains(@class,'referenceItem') and .//p[contains(text(),'Knittl_Frank_2020')]]//button

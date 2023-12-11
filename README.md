@@ -1,5 +1,4 @@
-# [CiteNinja](https://citeninja.fly.dev/) 🥷🏻
-
+[![CiteNinja Banner](./images/banner.png)](https://citeninja.fly.dev/)
 ![CI workflow badge](https://github.com/SJET-Code/ohtu-miniprojekti/workflows/CI/badge.svg) [![codecov](https://codecov.io/gh/SJET-Code/ohtu-miniprojekti/graph/badge.svg?token=0199YWM4XZ)](https://codecov.io/gh/SJET-Code/ohtu-miniprojekti)
 
 Helsingin yliopiston Ohjelmistotuotanto-kurssin miniprojekti, jonka tavoite on tehdä LaTex viittauksien hallinnoimisesta helpompaa!
@@ -23,3 +22,5 @@ Tekstikäyttöliittymä `poetry run invoke start`
 
 
 ## [Definition of Done kriteerit](./documents/DoD.md)
+
+

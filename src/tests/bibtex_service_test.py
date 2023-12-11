@@ -71,7 +71,7 @@ class TestBibTextService(unittest.TestCase):
 
     def test_deleting_one_reference_does_not_delete_others(self):
         model_entry = {
-            "title": 'ghi',
+            "title": "ghi",
             "author": "def",
             "year": "2013",
             "ENTRYTYPE": "article",
@@ -87,4 +87,37 @@ class TestBibTextService(unittest.TestCase):
 
         self.assertDictEqual(bibtex_data.entries[0], model_entry)
 
+    def test_adding_reference_with_correct_doi(self):
+        model_entry = {
+            "title": "A Quick Introduction to Version Control with Git and GitHub",
+            "author": "Blischak, John D. and Davenport, Emily R. and Wilson, Greg",
+            "year": "2016",
+            "ENTRYTYPE": "article",
+            "ID": "Blischak_2016"
+        }
+
+        doi = "10.1371/journal.pcbi.1004668"
+
+        data = self.bibtex_service.get_bibtex_data_from_doi(doi)
+
+        self.bibtex_service.write_to_bib_file(
+            data['type'],
+            data['key'],
+            data['author'],
+            data['title'],
+            data['year'],
+            self.file_name
+        )
+
+        bibtex_data = self.bibtex_service.read_from_bib_file(self.file_name)
+
+        self.assertDictEqual(bibtex_data.entries[1], model_entry)
+
+    def test_adding_reference_with_incorrect_doi(self):
+        doi = "invalid-doi"
+        self.assertIsNone(self.bibtex_service.get_bibtex_data_from_doi(doi))
+
+        bibtex_data = self.bibtex_service.read_from_bib_file(self.file_name)
+
+        self.assertEqual(len(bibtex_data.entries), 1)
 
