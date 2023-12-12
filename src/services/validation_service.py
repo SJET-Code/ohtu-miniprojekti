@@ -75,7 +75,7 @@ class ValidationService:
             raise ValidationError("Author was invalid", "/")
 
     def validate_title(self, s):
-        if not re.match(r"[a-zA-Z-,._\u2010\d ]+$", s):
+        if not re.match(r"[a-zA-Z-,:._\u2010\d ]+$", s):
             raise ValidationError("Title was invalid", "/")
 
     def validate_year(self, s):
