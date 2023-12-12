@@ -7,22 +7,6 @@
     <title>CiteNinja</title>
 </head>
 <body>
-    <h1>CiteNinja</h1>
-    <h2>Add reference</h2>
-    <form action="/add_reference" method="post">
-        <label for="reference_type">Choose reference type:</label>
-        <select id="reference_type" name="reference_type">
-            <option value="inproceedings">Inproceedings</option>
-            <option value="article">Article</option>
-            <option value="book">Book</option>
-        </select>
-        <input placeholder="Reference key" name="ID"/>
-        <input placeholder="Author" name="author"/>
-        <input placeholder="Title" name="title"/>
-        <input placeholder="Year" name="year" type="number"/>
-        <button type="submit">Add Reference</button>
-    </form>
-  
     <div class="banner-container">
         <img src="{{url_for('static',filename='images/banner.png')}}" alt="CiteNinja Banner with ninjas citing all sorts of things"/>
     </div>

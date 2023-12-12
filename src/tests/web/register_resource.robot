@@ -5,15 +5,15 @@ Library  RequestsLibrary
 
 *** Variables ***
 ${SERVER}  localhost:5000/register
-${DELAY}  0.5 seconds
+${DELAY}  0.1 seconds
 ${REGISTER_URL}  http://${SERVER}
 ${HOME_URL}  http://localhost:5000
 
 *** Keywords ***
 Open And Configure Browser
     ${options}  Evaluate  sys.modules['selenium.webdriver'].ChromeOptions()  sys
-    #Call Method    ${options}    add_argument    --no-sandbox
-    #Call Method  ${options}  add_argument  --headless
+    Call Method    ${options}    add_argument    --no-sandbox
+    Call Method  ${options}  add_argument  --headless
     Open Browser  browser=chrome  options=${options}
     Set Selenium Speed  ${DELAY}
 

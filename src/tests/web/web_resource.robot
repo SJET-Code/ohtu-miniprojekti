@@ -6,7 +6,7 @@ Library  ../FileOperations.py
 
 *** Variables ***
 ${SERVER}  localhost:5000
-${DELAY}  0.5 seconds
+${DELAY}  0.1 seconds
 ${HOME_URL}  http://${SERVER}
 ${DOWNLOAD_PATH}    ${CURDIR}
 ${WEB_URL}  https://citeninja.fly.dev/
@@ -17,8 +17,8 @@ ${DELETE_USER_URL}  ${HOME_URL}/delete_user
 *** Keywords ***
 Open And Configure Browser
     ${options}  Evaluate  sys.modules['selenium.webdriver'].ChromeOptions()  sys
-    #Call Method    ${options}    add_argument    --no-sandbox
-    #Call Method  ${options}  add_argument  --headless
+    Call Method    ${options}    add_argument    --no-sandbox
+    Call Method  ${options}  add_argument  --headless
     Open Browser  browser=chrome  options=${options}
     Set Selenium Speed  ${DELAY}
 
