@@ -4,13 +4,18 @@ from sqlalchemy import text
 from sqlalchemy.exc import IntegrityError, OperationalError
 from werkzeug.security import check_password_hash, generate_password_hash
 from flask import session
+from services.validation_service import ValidationType
 
 
 class UserRepository:
-    def __init__(self, db):
+    def __init__(self, db, validation_service):
         self.db = db
+        self.__validation_service = validation_service
 
     def create_user(self, username, password):
+        self.__validation_service.validate(username, ValidationType.USERNAME)
+        self.__validation_service.validate(password, ValidationType.PASSWORD)
+
         hash_value = generate_password_hash(password)
         try:
             sql = text("""INSERT INTO users (username, password_hash)

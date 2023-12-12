@@ -12,6 +12,6 @@ Open WebUi
     Welcome Page Should Be Open
 
 Login With Correct Credentials
-    Input User  test_user123  test_password
+    Input User  test_user123  Test_password123
     Submit Login
     Title Should Be  CiteNinja

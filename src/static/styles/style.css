@@ -96,3 +96,14 @@ button:hover {
     background: #45a049;
 }
 
+.error {
+    background-color: #c00;
+    color: white;
+    padding: 5px;
+    text-align: center;
+    position: fixed;
+    left: 0;
+    top: 0;
+    width: 100%;
+    z-index: 998;
+}

@@ -10,18 +10,28 @@
     <div class="banner-container">
         <img src="{{url_for('static',filename='images/banner.png')}}" alt="CiteNinja Banner with ninjas citing all sorts of things"/>
     </div>
-<form action="/register" method="POST">
-    <h2>New user</h2>
-    <p>
-        Username: <input type="text" name="username" value="{{name}}" maxlength="20" required> 
-    </p>
-    <p>
-        Password: <input type="password" name="password_hash" maxlength="20"  required>
-    </p>
-    <input type="submit" class="button" value="register">
-</form>
-<form action="/login" method="get">
-    <button type="submit">Login</button>
+    <form action="/register" method="POST">
+        <h2>New user</h2>
+        <p>
+            Username: <input type="text" name="username" value="{{name}}" maxlength="20" required> 
+        </p>
+        <p>
+            Password: <input type="password" name="password_hash" maxlength="20"  required>
+        </p>
+        <input type="submit" class="button" value="register">
+    </form>
+    <form action="/login" method="get">
+        <button type="submit">Login</button>
+    </form>
+    {% with messages = get_flashed_messages() %}
+        {% if messages %}
+            {% for message in messages %}
+                <div class="error">
+                    {{ message }}
+                </div>
+            {% endfor %}
+        {% endif %}
+    {% endwith %}
 
-</body>
+    </body>
 </html>

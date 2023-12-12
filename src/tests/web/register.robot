@@ -12,7 +12,7 @@ Open WebUi
     Welcome Page Should Be Open
 
 Register With Correct Credentials
-    Input User  testi  testiman123
+    Input User  testi  Testiman123
     Submit Register
     Title Should Be  CiteNinja
     Delete User

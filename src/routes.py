@@ -2,22 +2,20 @@
 import tempfile
 import os
 from io import BytesIO
-from flask import redirect, render_template, request, make_response, flash
+from flask import redirect, render_template, request, make_response
 from flask_app import app
 from services.bibtex_service import BibTextService
+from services.validation_service import ValidationService, ValidationError
 from repositories.citation_repository import CitationRepository
 from repositories.user_repository import UserRepository
 from database import db
 
 
-citation_repo = CitationRepository(db)
-user_repo = UserRepository(db)
+validation_service = ValidationService()
+citation_repo = CitationRepository(db, validation_service)
+user_repo = UserRepository(db, validation_service)
 bibtex_service = BibTextService()
 
-
-def error(message, destination):
-    flash(message)
-    return redirect(destination)
 
 @app.route("/")
 def index():
@@ -87,7 +85,8 @@ def register():
 
         if user_repo.create_user(username, password):
             return redirect("/")
-        return error("Registeration failed, user already exists", "register")
+
+        raise ValidationError("User already exists", "/register")
     return redirect("/")
 
 @app.route('/login', methods=["GET", "POST"])
@@ -101,7 +100,7 @@ def login():
         if user_repo.login_user(username, password):
             return redirect("/")
 
-        return error("Wrong username or password", "login")
+        raise ValidationError("Wrong username or password", "/login")
     return redirect("/")
 
 @app.route('/logout', methods=["GET"])
