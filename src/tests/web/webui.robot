@@ -48,20 +48,20 @@ List All References
 Remove Reference
     Set Selenium Implicit Wait  1s
 
-    Click Element  xpath=//tr[contains(@class,'referenceItem') and .//td[contains(text(),'test_key1')]]//button
-    Click Element  xpath=//tr[contains(@class,'referenceItem') and .//td[contains(text(),'test_key2')]]//button
-    Click Element  xpath=//tr[contains(@class,'referenceItem') and .//td[contains(text(),'test_key3')]]//button
+    Run Keyword Until Success  Click Element  name=delete_test_key1
+    Run Keyword Until Success  Click Element  name=delete_test_key2
+    Run Keyword Until Success  Click Element  name=delete_test_key3
 
 Show References As Bibtex
     Select From List by Value  id=reference_type  article
     Input Reference  test_key4  test_author  test_title  2023
     Submit Reference
 
-    Click Element  xpath=//button[contains(text(), "Show references as bibtex")]
+    Run Keyword Until Success  Click Element  name=toggle_bibtex_on
 
     Wait Until Page Contains Element  xpath=//div[contains(@class,'referenceBibtex') and .//p[contains(text(),'@article{test_key4,')]]
-    Click Element  xpath=//button[contains(text(), "Show references as a list")]
-    Click Element  xpath=//tr[contains(@class,'referenceItem') and .//td[contains(text(),'test_key4')]]//button
+    Run Keyword Until Success  Click Element  name=toggle_bibtex_off
+    Run Keyword Until Success  Click Element  name=delete_test_key4
 
 Download References
     Click Element    xpath=//form[@action="/download_references"]/button[@type="submit"]
@@ -76,4 +76,4 @@ Add Reference With Doi
     Input Doi    10.1002/chem.202000622
     Submit Doi
     Wait Until Page Contains Element  xpath=//tr[contains(@class,'referenceItem') and .//td[contains(text(),'Knittl_Frank_2020')]]
-    Click Element  xpath=//tr[contains(@class,'referenceItem') and .//td[contains(text(),'Knittl_Frank_2020')]]//button
+    Run Keyword Until Success  Click Element  name=delete_Knittl_Frank_2020

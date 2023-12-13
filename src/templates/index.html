@@ -71,11 +71,11 @@
               <div class="col">
                 <form action="/">
                     {% if show_bibtex == "true" %}
-                        <input type="hidden" name="show_bibtex" value="false">
-                        <button type="submit" class="btn btn-success">Show references as a list</button>
+                        <input name="show_bibtex" type="hidden" value="false">
+                        <button name="toggle_bibtex_off" type="submit" class="btn btn-success">Show references as a list</button>
                     {% else %}
-                        <input type="hidden" name="show_bibtex" value="true">
-                        <button type="submit" class="btn btn-success">Show references as bibtex</button>
+                        <input name="show_bibtex" type="hidden" value="true">
+                        <button name="toggle_bibtex_on" type="submit" class="btn btn-success">Show references as bibtex</button>
                     {% endif %}
                 </form>
               </div>

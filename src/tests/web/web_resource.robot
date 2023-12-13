@@ -18,7 +18,7 @@ ${DELETE_USER_URL}  ${HOME_URL}/delete_user
 Open And Configure Browser
     ${options}  Evaluate  sys.modules['selenium.webdriver'].ChromeOptions()  sys
     Call Method    ${options}    add_argument    --no-sandbox
-    #Call Method  ${options}  add_argument  --headless
+    Call Method  ${options}  add_argument  --headless
     Open Browser  browser=chrome  options=${options}
     Set Selenium Speed  ${DELAY}
 
@@ -57,7 +57,7 @@ Go To Login Page
     Go To  ${LOGIN_URL}
 
 Submit Doi
-    Click Element  name=add_doi
+    Click Element  xpath=//html/body/div[2]/form[2]/div/div[2]/button
 
 Input Doi
     [Arguments]  ${doi}
@@ -72,3 +72,7 @@ Create Test User And Login
 
 Delete Test User
     Go To  ${DELETE_USER_URL}
+
+Run Keyword Until Success
+    [Arguments]  ${KW}  @{KWARGS}
+    Wait Until Keyword Succeeds  10s  1s  ${KW}  @{KWARGS}
