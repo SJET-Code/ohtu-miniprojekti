@@ -43,7 +43,7 @@ Submit Reference
     Click Element  name=add_ref
 
 Get Bibfile Path
-    Click Element    xpath=//form[@action="/download_references"]/button[@type="submit"]
+    Click Element    xpath=///html/body/div[2]/div[1]/div/div[2]/form/button
     Wait Until File Exists    ${DOWNLOAD_PATH}${/}references.bib
     ${file_exists}    File Should Exist    ${DOWNLOAD_PATH}${/}references.bib
 
