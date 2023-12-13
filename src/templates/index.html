@@ -91,25 +91,25 @@
             {% endfor %}
         {% else %}
             
-            <table class="table table-bordered">
-                <thead class="table-light">
-                  <tr class="align-middle">
-                    <th class="align-middle" scope="col">                
+            <table class="table table-bordered table-hover table-striped">
+                <thead>
+                  <tr>
+                    <th class="text-center" scope="col">                
                         <form action="/delete_references" method="post" onsubmit="return confirmDelete();">
                             <button name="delete_all" type="submit" class="btn btn-danger">Delete all</button>
                         </form>
                     </th>
-                    <th class="align-middle" scope="col">Type</th>
-                    <th class="align-middle" scope="col">Key</th>
-                    <th class="align-middle" scope="col">Title</th>
-                    <th class="align-middle" scope="col">Author</th>
-                    <th class="align-middle" scope="col">Year</th>
+                    <th class="text-center align-middle" scope="col">Type</th>
+                    <th class="text-center align-middle" scope="col">Key</th>
+                    <th class="text-center align-middle" scope="col">Title</th>
+                    <th class="text-center align-middle" scope="col">Author</th>
+                    <th class="text-center align-middle" scope="col">Year</th>
                   </tr>
                 </thead>
                 <tbody class="table table-group-divider table-hover">
                 {% for reference in references %}
                     <tr class="referenceItem">
-                        <th scope="row">              
+                        <th scope="row" class="text-center align-middle">              
                             <form action="/delete_reference/{{ reference.key }}" method="post">
                                 <button name="delete_{{ reference.key }}" type="submit" class="btn btn-danger">Delete</button>
                             </form>
