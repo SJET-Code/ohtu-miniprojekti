@@ -21,7 +21,7 @@ Open And Configure Browser
     Set Selenium Speed  ${DELAY}
 
 Welcome Page Should Be Open
-    Title Should Be  Login
+    Title Should Be  CiteNinja Login
 
 Go To Login Page
     Go To  ${LOGIN_URL}
@@ -30,10 +30,10 @@ Go To Register Page
     Go To  ${REGISTER_URL}
 
 Submit Login
-    Click Button  login
+    Click Element  name=login
 
 Submit Logout
-    Click Element    xpath=//form[@action="/logout"]/button[@type="submit"]
+    Go To  ${HOME_URL}/logout
 
 Go To Main Page
     Go To  ${HOME_URL}
@@ -47,10 +47,9 @@ Create Test User
     Go To Register Page
     Input Text     name=username    test_user123
     Input Password    name=password_hash    Test_password123
-    Click Button  register
+    Click Element  xpath=//html/body/form/div[2]/div[1]/input
     Submit Logout
     Welcome Page Should Be Open
 
 Delete Test User
     Go To  ${HOME_URL}/delete_user
-    Welcome Page Should Be Open

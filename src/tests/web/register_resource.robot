@@ -21,16 +21,16 @@ Go To Register Page
     Go To  ${REGISTER_URL}
 
 Welcome Page Should Be Open
-    Title Should Be  Register
+    Title Should Be  CiteNinja Register
 
 Submit Register
-    Click Button  register
+    Click Element  name=register
 
 Go To Main Page
     Go To  ${HOME_URL}
 
 Login Page Should Be Open
-    Title Should Be  Login
+    Title Should Be  CiteNinja Login
 
 Input User
     [Arguments]    ${username}    ${password}

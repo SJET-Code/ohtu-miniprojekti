@@ -26,7 +26,7 @@ Welcome Page Should Be Open
     Title Should Be  CiteNinja
 
 Login Page Should Be Open
-    Title Should Be  Login
+    Title Should Be  CiteNinja Login
 
 Go To Main Page
     Go To  ${HOME_URL}
@@ -40,7 +40,7 @@ Input Reference
 
 
 Submit Reference
-    Click Button  Add Reference
+    Click Element  name=add_ref
 
 Get Bibfile Path
     Click Element    xpath=//form[@action="/download_references"]/button[@type="submit"]
@@ -57,7 +57,7 @@ Go To Login Page
     Go To  ${LOGIN_URL}
 
 Submit Doi
-    Click Button  Find
+    Click Element  name=add_doi
 
 Input Doi
     [Arguments]  ${doi}
@@ -67,7 +67,7 @@ Create Test User And Login
     Go To Register Page
     Input Text     name=username    test_user123
     Input Password    name=password_hash    Test_password123
-    Click Button  register
+    Click Element  name=register
     Go To Main Page
 
 Delete Test User

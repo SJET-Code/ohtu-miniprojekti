@@ -19,7 +19,7 @@ Add Inproceedings Reference
 
     Submit Reference
 
-    Wait Until Page Contains Element  xpath=//div[contains(@class,'referenceItem') and .//p[contains(text(),'test_key1')]]
+    Wait Until Page Contains Element  xpath=//tr[contains(@class,'referenceItem') and .//td[contains(text(),'test_key1')]]
 
 Add Article Reference
 
@@ -28,7 +28,7 @@ Add Article Reference
 
     Submit Reference
 
-    Wait Until Page Contains Element  xpath=//div[contains(@class,'referenceItem') and .//p[contains(text(),'test_key2')]]
+    Wait Until Page Contains Element  xpath=//tr[contains(@class,'referenceItem') and .//td[contains(text(),'test_key2')]]
 
 
 Add Book Reference
@@ -38,19 +38,19 @@ Add Book Reference
 
     Submit Reference
 
-    Wait Until Page Contains Element  xpath=//div[contains(@class,'referenceItem') and .//p[contains(text(),'test_key3')]]
+    Wait Until Page Contains Element  xpath=//tr[contains(@class,'referenceItem') and .//td[contains(text(),'test_key3')]]
 
 List All References
-    ${reference_count}=  Get Element Count  xpath=//div[contains(@class,'referenceItem')]
+    ${reference_count}=  Get Element Count  xpath=//tr[contains(@class,'referenceItem')]
 
     Should Be Equal As Integers  ${reference_count}  ${reference_count}
 
 Remove Reference
     Set Selenium Implicit Wait  1s
 
-    Click Element  xpath=//div[contains(@class,'referenceItem') and .//p[contains(text(),'test_key1')]]//button
-    Click Element  xpath=//div[contains(@class,'referenceItem') and .//p[contains(text(),'test_key2')]]//button
-    Click Element  xpath=//div[contains(@class,'referenceItem') and .//p[contains(text(),'test_key3')]]//button
+    Click Element  xpath=//tr[contains(@class,'referenceItem') and .//td[contains(text(),'test_key1')]]//button
+    Click Element  xpath=//tr[contains(@class,'referenceItem') and .//td[contains(text(),'test_key2')]]//button
+    Click Element  xpath=//tr[contains(@class,'referenceItem') and .//td[contains(text(),'test_key3')]]//button
 
 Show References As Bibtex
     Select From List by Value  id=reference_type  article
@@ -61,7 +61,7 @@ Show References As Bibtex
 
     Wait Until Page Contains Element  xpath=//div[contains(@class,'referenceBibtex') and .//p[contains(text(),'@article{test_key4,')]]
     Click Element  xpath=//button[contains(text(), "Show references as a list")]
-    Click Element  xpath=//div[contains(@class,'referenceItem') and .//p[contains(text(),'test_key4')]]//button
+    Click Element  xpath=//tr[contains(@class,'referenceItem') and .//td[contains(text(),'test_key4')]]//button
 
 Download References
     Click Element    xpath=//form[@action="/download_references"]/button[@type="submit"]
@@ -75,5 +75,5 @@ Website can be accessed
 Add Reference With Doi
     Input Doi    10.1002/chem.202000622
     Submit Doi
-    Wait Until Page Contains Element  xpath=//div[contains(@class,'referenceItem') and .//p[contains(text(),'Knittl_Frank_2020')]]
-    Click Element  xpath=//div[contains(@class,'referenceItem') and .//p[contains(text(),'Knittl_Frank_2020')]]//button
+    Wait Until Page Contains Element  xpath=//tr[contains(@class,'referenceItem') and .//td[contains(text(),'Knittl_Frank_2020')]]
+    Click Element  xpath=//tr[contains(@class,'referenceItem') and .//td[contains(text(),'Knittl_Frank_2020')]]//button

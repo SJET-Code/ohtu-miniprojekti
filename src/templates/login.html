@@ -4,26 +4,36 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="{{url_for('static',filename='styles/style.css')}}" type="text/css">
-    <title>Login</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL" crossorigin="anonymous"></script>
+   <title>CiteNinja Login</title>
 </head>
 <body>
     <div class="banner-container">
         <img src="{{url_for('static',filename='images/banner.png')}}" alt="CiteNinja Banner with ninjas citing all sorts of things"/>
     </div>
-    <form action="/login" method="POST">
-        <h1>Login</h1>
-        <p> 
-            Username: <input type="text" name="username">
-        </p>
-        <p>
-            Password: <input type="password" name="password_hash">
-        </p>
-        <input type="submit" class="button" value="login">
-    </form>
-    <form action="/register" method="get">
-        <button type="submit">Register</button>
-    </form>
-
+    <h1>Login</h1>
+        <form action="/login" method="POST">
+                <div class="row g-3" style="padding-left: 15%; padding-right: 15%; padding-bottom: 5%;">
+                    <div class="col">
+                        <input type="text" name="username" class="form-control" placeholder="Username" aria-label="Username">
+                    </div>
+                    <div class="col">
+                        <input type="password" name="password_hash" class="form-control" placeholder="Password" aria-label="Password">
+                    </div>
+                </div>
+                <div class="row" style="padding-left: 15%; padding-right: 15%;">
+                    <div class="col">
+                        <input name="login" class="btn btn-success" type="submit" value="Login">
+                    </div>
+        </form>
+        
+                    <div class="col">
+                        <form action="/register" method="get">
+                            <input name="register" class="btn btn-success" type="submit" value="Register">
+                        </form>
+                    </div>
+                </div>
     {% with messages = get_flashed_messages() %}
         {% if messages %}
             {% for message in messages %}
