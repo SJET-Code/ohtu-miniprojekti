@@ -150,8 +150,6 @@ class BibtexUi:
             elif choose_reference == "3":
                 self.add_reference("book")
 
-            # If choosing "other" references, input has to be a one what bittexparser
-            # recognizes as one (i.e: inbook, phdthesis, misc, etc  ) to avoid errors.
             elif choose_reference == "4":
                 custom_reference_type = self._io.read(("Write your reference\n"))
                 self.add_reference(custom_reference_type)

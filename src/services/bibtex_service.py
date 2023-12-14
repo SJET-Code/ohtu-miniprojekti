@@ -73,7 +73,7 @@ class BibTextService:
 
     def _reference_list_generator(self, references):
         new_references_list = []
-        #can/should be expanded for each specific entrytype
+
         for reference in references:
             new_reference = Reference(reference["ENTRYTYPE"], reference["ID"],
                 reference["author"], reference["title"], reference["year"],)
