@@ -25,11 +25,15 @@ Open Register Login And Configure Browser
     Call Method  ${options}  add_argument  --headless
     Open Browser  browser=chrome  options=${options}
     Set Selenium Speed  ${DELAY}
+
+
+
+Register Login And Go To Home Page
     Go To  ${REGISTER_URL}
-    Input User  testi  Seven777
+    Input User  newUser  Seven777
     Submit Register
-    Go To Login Page
-    Input User  testi  Seven777
+    Go To  ${LOGIN_URL}
+    Input User  newUser  Seven777
     Submit Login
 
 Go To Register Page
@@ -60,3 +64,10 @@ Input User
     [Arguments]    ${username}    ${password}
     Input Text     name=username    ${username}
     Input Password    name=password_hash    ${password}
+
+Input Reference
+    [Arguments]  ${key}  ${author}  ${title}  ${year}
+    Input Text  name=ID  ${key}
+    Input Text  name=author  ${author}
+    Input Text  name=title  ${title}
+    Input Text  name=year  ${year}
