@@ -40,6 +40,24 @@ Add Book Reference
 
     Wait Until Page Contains Element  xpath=//tr[contains(@class,'referenceItem') and .//td[contains(text(),'test_key3')]]
 
+Add Journal Reference
+
+    Select From List by Value  id=reference_type  book
+    Input Reference  test_journal  test_author  test_title  2023
+
+    Submit Reference
+
+    Wait Until Page Contains Element  xpath=//tr[contains(@class,'referenceItem') and .//td[contains(text(),'test_journal')]]
+
+Add Unpublished Reference
+
+    Select From List by Value  id=reference_type  book
+    Input Reference  test_unpublished  test_author  test_title  2023
+
+    Submit Reference
+
+    Wait Until Page Contains Element  xpath=//tr[contains(@class,'referenceItem') and .//td[contains(text(),'test_unpublished')]]
+
 List All References
     ${reference_count}=  Get Element Count  xpath=//tr[contains(@class,'referenceItem')]
 
