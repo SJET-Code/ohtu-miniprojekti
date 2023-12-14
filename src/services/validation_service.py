@@ -66,16 +66,18 @@ class ValidationService:
             raise ValidationError("Password must contain a uppercase letter", "/register")
 
     def validate_citation_key(self, s):
-        if not re.match(r"[a-zA-Z-_:\d]+$", s):
+        if not re.match(r"[a-zA-ZÀ-ÿ-_:\d]+$", s, re.UNICODE):
             message = 'Citation key can only contain alphanumeric, "-", "_", and ":" characters'
             raise ValidationError(message, "/")
 
     def validate_author(self, s):
-        if not re.match(r"[a-zA-Z-,._\u2010\d ]+$", s):
+        if not re.match(r"[a-zA-ZÀ-ÿ-,.;_\u2010\d ]+$", s, re.UNICODE):
+            print(s)
             raise ValidationError("Author was invalid", "/")
 
     def validate_title(self, s):
-        if not re.match(r"[a-zA-Z-,:._\u2010\d ]+$", s):
+        if not re.match(r"[a-zA-ZÀ-ÿ-,:'´`’.^+${}_–\u2010\d ]+$", s, re.UNICODE):
+            print(s)
             raise ValidationError("Title was invalid", "/")
 
     def validate_year(self, s):
