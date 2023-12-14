@@ -19,23 +19,42 @@ Open And Configure Browser
     Open Browser  browser=chrome  options=${options}
     Set Selenium Speed  ${DELAY}
 
+Open Register Login And Configure Browser
+    ${options}  Evaluate  sys.modules['selenium.webdriver'].ChromeOptions()  sys
+    Call Method    ${options}    add_argument    --no-sandbox
+    Call Method  ${options}  add_argument  --headless
+    Open Browser  browser=chrome  options=${options}
+    Set Selenium Speed  ${DELAY}
+    Go To  ${REGISTER_URL}
+    Input User  testi  Seven777
+    Submit Register
+    Go To Login Page
+    Input User  testi  Seven777
+    Submit Login
+
 Go To Register Page
     Go To  ${REGISTER_URL}
 
 Go To Login Page
     Go To  ${LOGIN_URL}
 
-Go To Login Page
+Go To Home Page
     Go To  ${HOME_URL}
 
-Welcome Page Should Be Open
+Register Page Should Be Open
     Title Should Be  CiteNinja Register
 
 Login Page Should Be Open
     Title Should Be  CiteNinja Login
 
+Home Page Should Be Open
+    Title Should Be  CiteNinja
+
 Submit Register
     Click Element  name=register
+
+Submit Login
+    Click Element  name=login
 
 Input User
     [Arguments]    ${username}    ${password}

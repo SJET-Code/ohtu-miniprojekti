@@ -10,7 +10,7 @@ Test Setup  Go To Register Page
 Open WebUi
     Open And Configure Browser
     Go To Register Page
-    Welcome Page Should Be Open
+    Register Page Should Be Open
 
 Register With Short Password
     Input User  testi  Seven77
