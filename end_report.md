@@ -45,7 +45,10 @@ Websovellus sai loistavan kasvojen kohotuksen, kun sivuston ulkonäkö päivitet
 ## Projektin sujuvuus ja opit
 Projektissa opittiin työskentelyä pienessä ketteränohjelmistokehityksen tiimissä. Projektin aikana opeteltiin uusia työskentelytapoja, kommunikaatiota, kokouskäytäntöjä ja dokumentaatiota. Kokouskäytännöt sujuivat hyvin koko projektin aikana ja niiden arvo huomattiin retroperspektiiveissä, joka vahvisti käytäntöjen toteuttamista.
 
-Parikoodaamista kokeiltiin ja se tuntui mielekkäältä. Parityöskentelyä olisi voinut soveltaa myös enemmän. Kommunikaation tärkeys yleisesti koettiin tärkeäksi osaksi ohjelmistokehitystä ja asia varmasti korostuisi isommissa ja pidemmissä hankkeissa. Kommunikaatioon liipaten myös dokumentaation tärkeys nousi esille. 
+Parikoodaamista kokeiltiin ja se tuntui mielekkäältä. Parityöskentelyä olisi voinut soveltaa myös enemmän. Kommunikaation tärkeys yleisesti koettiin tärkeäksi osaksi ohjelmistokehitystä ja asia varmasti korostuisi isommissa ja pidemmissä hankkeissa. Kommunikaatioon liipaten myös dokumentaation tärkeys nousi esille. Scrumin suosittelema samassa tilassa työskentely ja daily scrum palaverit olisivat kiinnostava lisä ja kokeiltava asia.
 
-Jatkuvan julkaisun tekniikka oli mielenkiintoista ja sujui mallikkaasti. Joitain testejä rikkovia committeja tehtiin, mutta koodi saatiin korjattua ripeästi. 
+Jatkuvan julkaisun tekniikka oli mielenkiintoista ja sujui mallikkaasti. Joitain testejä rikkovia committeja tehtiin, mutta koodi saatiin korjattua ripeästi.
 
+Projektissa ei menty kovin syvälle teknisiin asioihin ja näiden soveltaminen periytyi pitkälti jäsenien aiemmista projekteista ja kokemuksesta. Joitain teknisiähaasteita ilmeni joissa scrum tyyppinen samassa tilassa työskentely auttaisi haasteiden nopeaan reagointiin.
+
+Haastavalta projektissa tuntui mahdollinen ylitestaaminen, etenkin isompien refraktorointien yhteydessä. Työelämässä liiallinen testaaminen osoittautuisi myös ajallisesti ja kustannuksiltaan turhan raskaaksi. Joitain refraktorointeja jätettiinkin tekemättä, koska ne vaikuttaisivat suureen määrään testejä.
