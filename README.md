@@ -16,9 +16,9 @@ Flask web-sovellus `poetry run invoke flask`
 
 Tekstikäyttöliittymä `poetry run invoke start`
 
+## [Loppuraportti](./end_report.md)
 
 ## [Product backlog](https://docs.google.com/spreadsheets/d/1RbO_Gy8ZapAasyJvEX_d92clEDd4_5P1BG1dUu0xQnI/edit?usp=sharing)
-
 
 
 ## [Definition of Done kriteerit](./documents/DoD.md)

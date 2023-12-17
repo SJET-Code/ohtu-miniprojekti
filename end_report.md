@@ -42,5 +42,10 @@ Sprint 4 otti oppia aiemman sprintin retroperspektiivistä. Tähän liittyi konf
 
 Websovellus sai loistavan kasvojen kohotuksen, kun sivuston ulkonäkö päivitettiin nykyaikaiseen muotoon. 
 
-## Projektin sujuvuus ja kehitys
+## Projektin sujuvuus ja opit
+Projektissa opittiin työskentelyä pienessä ketteränohjelmistokehityksen tiimissä. Projektin aikana opeteltiin uusia työskentelytapoja, kommunikaatiota, kokouskäytäntöjä ja dokumentaatiota. Kokouskäytännöt sujuivat hyvin koko projektin aikana ja niiden arvo huomattiin retroperspektiiveissä, joka vahvisti käytäntöjen toteuttamista.
+
+Parikoodaamista kokeiltiin ja se tuntui mielekkäältä. Parityöskentelyä olisi voinut soveltaa myös enemmän. Kommunikaation tärkeys yleisesti koettiin tärkeäksi osaksi ohjelmistokehitystä ja asia varmasti korostuisi isommissa ja pidemmissä hankkeissa. Kommunikaatioon liipaten myös dokumentaation tärkeys nousi esille. 
+
+Jatkuvan julkaisun tekniikka oli mielenkiintoista ja sujui mallikkaasti. Joitain testejä rikkovia committeja tehtiin, mutta koodi saatiin korjattua ripeästi. 
 
