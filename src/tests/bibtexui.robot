@@ -1,6 +1,7 @@
 *** Settings ***
 Resource  resource.robot
 Test Setup  Reset
+Library    Process
 
 *** Test Cases ***
 Add Article Reference
@@ -31,5 +32,14 @@ Remove All References From List
     Run App And Stop
     Output Should Contain  \nNo Citations Found\n
 
-    
-    
+Filter References
+    Add Test Reference Potter
+    Choose To List References By Title
+    Run App And Stop
+    Output Should Contain    \nID: HP1\nTitle: Harry Potter\nAuthor: J.K. Rowling\nYear: 1997\nReference type: book\n
+
+Add Reference With DOI
+    Go To Input Doi
+    Input Doi    10.1002/chem.202000622
+    Run App And Stop
+    Output Should Contain  Added an article successfully

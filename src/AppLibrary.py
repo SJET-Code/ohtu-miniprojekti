@@ -1,11 +1,13 @@
 # pylint: disable=C0103
 from app import BibtexUi
 from services.io_service import StubIOService
+from routes import citation_repo
 
 class AppLibrary:
     def __init__(self):
         self._io = StubIOService()
         self.stub_ui = BibtexUi(self._io, True)
+        self.citation_repo = citation_repo
 
     def start(self):
         self.stub_ui.start()

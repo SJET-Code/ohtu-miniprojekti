@@ -1,5 +1,7 @@
 import bibtexparser
+import requests
 from bibtexparser.bwriter import BibTexWriter
+from bibtexparser.bparser import BibTexParser
 from entities.reference import Reference
 from services.file_service import FileService
 
@@ -47,11 +49,7 @@ class BibTextService:
         return bibtexdatafile
 
     def delete_from_bib_file(self, reference_id, references, file_name = None):
-        copyreferencelist = []
-
-        for value in references.entries:
-            if value.get("ID") != reference_id:
-                copyreferencelist.append(value)
+        copyreferencelist = [value for value in references.entries if value.get("ID") != reference_id]
 
         bibtex_reference_list = self._reference_list_generator(copyreferencelist)
         self.rewrite_bib_file(bibtex_reference_list, file_name)
@@ -75,9 +73,44 @@ class BibTextService:
 
     def _reference_list_generator(self, references):
         new_references_list = []
-        #can/should be expanded for each specific entrytype
+
         for reference in references:
             new_reference = Reference(reference["ENTRYTYPE"], reference["ID"],
                 reference["author"], reference["title"], reference["year"],)
             new_references_list.append(new_reference)
         return new_references_list
+
+    def _parse_doi_data(self, entry):
+        entrytype = entry.get('ENTRYTYPE', '')
+        key = entry.get('ID', '')
+        author = entry.get('author', '')
+        title = entry.get('title', '')
+        year = entry.get('year', '')
+        return {
+            "type": entrytype,
+            "key": key,
+            "author": author,
+            "title": title,
+            "year": year
+        }
+
+    def _doi_request(self, doi_input):
+        if not doi_input:
+            return None
+        url =  "http://dx.doi.org/" + doi_input
+        headers = {"accept": "application/x-bibtex"}
+        timeout_seconds = 5
+        request = requests.get(url, headers=headers, timeout=timeout_seconds)
+        if request.status_code == 200:
+            bib_data = request.text
+            parser = BibTexParser()
+            bib_database = bibtexparser.loads(bib_data, parser=parser)
+            entry = bib_database.entries[0]
+            return self._parse_doi_data(entry)
+        return None
+
+    def get_bibtex_data_from_doi(self, doi_input):
+        parsed_data = self._doi_request(doi_input)
+        if parsed_data:
+            return parsed_data
+        return None

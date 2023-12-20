@@ -1,0 +1,109 @@
+@charset "UTF-8";
+/* Basic reset */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+/* Body styling */
+body {
+    font-family: 'Arial', sans-serif;
+    line-height: 1.6;
+    color: #333;
+    background-color: #f4f4f4;
+}
+
+/* Container */
+.container {
+    width: 80%;
+    margin: auto;
+    overflow: hidden;
+    padding: 20px;
+}
+.banner-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+    margin-top: 20px; /* Adjust as needed */
+}
+
+.banner-container img {
+    width: 30%; /* Adjust the width as needed */
+    height: auto; /* This maintains the aspect ratio */
+}
+
+.referenceItem {
+    margin-bottom:50px;
+    text-align: center;
+}
+
+.referenceBibtex {
+    margin-bottom:50px;
+    margin-left: 30%;
+    text-align: left;
+}
+/* Header */
+h1 {
+    color: #333;
+    text-align: center;
+    margin-bottom: 20px;
+}
+h2 {
+    color: #333;
+    text-align: center;
+    margin-bottom: 20px;
+}
+/* User actions */
+.user-actions {
+    text-align: center;
+    margin-bottom: 20px;
+}
+
+/* Forms and buttons */
+form {
+    margin: 10px auto;
+    text-align: center;
+}
+
+.button {
+    display: inline-block;
+    background: #4CAF50;
+    color: #fff;
+    border: none;
+    padding: 10px 20px;
+    margin: 5px;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+.button:hover {
+    background: #45a049;
+}
+button {
+    display: inline-block;
+    background: #4CAF50;
+    color: #fff;
+    border: none;
+    padding: 10px 20px;
+    margin: 5px;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+button:hover {
+    background: #45a049;
+}
+
+.error {
+    background-color: #c00;
+    color: white;
+    padding: 5px;
+    text-align: center;
+    position: fixed;
+    left: 0;
+    top: 0;
+    width: 100%;
+    z-index: 998;
+}

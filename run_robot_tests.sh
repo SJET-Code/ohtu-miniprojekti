@@ -5,7 +5,7 @@ psql postgresql://postgres:postgres@localhost:5432 < schema.sql
 
 poetry run flask --app src/flask_app.py run &
 
-while [[ "$(curl -s -o /dev/null -w ''%{http_code}'' localhost:5000)" != "200" ]];
+while [[ "$(curl -s -o /dev/null -w ''%{http_code}'' localhost:5000)" != "302" ]];
   do sleep 1;
 done
 

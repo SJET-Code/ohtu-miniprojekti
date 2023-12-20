@@ -23,21 +23,9 @@ class BibtexUi:
             user_input = self._io.read(message)
 
             if user_input == "1":
-                message = ("Choose your reference you want to add by number:" +
-                           "\n1: inproceedings\n2: article \n3: book\n4: other\n")
-                choose_reference = self._io.read(message)
-                if choose_reference == "1":
-                    self.add_reference("inproceedings")
-                elif choose_reference == "2":
-                    self.add_reference("article")
-                elif choose_reference == "3":
-                    self.add_reference("book")
-
-                # If choosing "other" references, input has to be a one what bittexparser
-                # recognizes as one (i.e: inbook, phdthesis, misc, etc  ) to avoid errors.
-                elif choose_reference == "4":
-                    custom_reference_type = self._io.read(("Write your reference\n"))
-                    self.add_reference(custom_reference_type)
+                message = "1: Add with DOI-code \n2: Add yourself\n"
+                choose_input_method = self._io.read(message)
+                self.input_reference(choose_input_method)
 
             elif user_input == "2":
                 message = ("List by:"+
@@ -133,3 +121,35 @@ class BibtexUi:
                 f"Author: {reference['author']}\n"
                 f"Year: {reference['year']}\n"
                 f"Reference type: {reference['ENTRYTYPE']}\n")
+
+
+    def input_reference(self, choose_input_method):
+        if choose_input_method == "1":
+            message = "Input DOI:\n"
+            doi_input = self._io.read(message)
+            data = self.service.get_bibtex_data_from_doi(doi_input)
+            if data:
+                self.service.write_to_bib_file(
+                    data['type'],
+                    data['key'],
+                    data['author'],
+                    data['title'],
+                    data['year']
+                )
+                self._io.write("Added an article successfully")
+            else:
+                self._io.write("DOI not found\n")
+        if choose_input_method == "2":
+            message = ("Choose your reference you want to add by number:" +
+                    "\n1: inproceedings\n2: article \n3: book\n4: other\n")
+            choose_reference = self._io.read(message)
+            if choose_reference == "1":
+                self.add_reference("inproceedings")
+            elif choose_reference == "2":
+                self.add_reference("article")
+            elif choose_reference == "3":
+                self.add_reference("book")
+
+            elif choose_reference == "4":
+                custom_reference_type = self._io.read(("Write your reference\n"))
+                self.add_reference(custom_reference_type)
