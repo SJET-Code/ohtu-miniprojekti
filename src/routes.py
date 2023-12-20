@@ -48,11 +48,13 @@ def delete_reference(reference_id):
 
 @app.route("/delete_references", methods=["POST"])
 def delete_all_references():
-    if user_repo.is_user():
-        citation_repo.delete_all_citations(user_repo.user_id())
+    try:
+        if user_repo.is_user():
+            citation_repo.delete_all_citations(user_repo.user_id())
 
-    return redirect("/")
-
+        return redirect("/")
+    except (ValueError, Exception):
+        print(f"Error deleting references: {e}")
 
 @app.route("/download_references", methods=["POST"])
 def download_references():
