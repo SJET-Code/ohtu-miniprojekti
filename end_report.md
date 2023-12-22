@@ -38,9 +38,12 @@ Sprintin aikana sovellus kehittyi teknisesti suuria harppauksia, kun ohjelmisto 
 Haasteena sprintissä 3 oli konfikuroinnin haasteet ja hitaus sekä pylint ignoren käyttäminen työn eteenpäin saattamiseksi.
 
 ### Sprint 4 @ 7.- 14.12.2023
-Sprint 4 otti oppia aiemman sprintin retroperspektiivistä. Tähän liittyi konfikuroinnin vähentäminen ja työn tehostaminen yleisesti. Myös parikoodaus ???
+Sprint 4 otti oppia aiemman sprintin retroperspektiivistä. Tähän liittyi konfiguroinnin vähentäminen ja työn tehostaminen yleisesti. 
 
 Websovellus sai loistavan kasvojen kohotuksen, kun sivuston ulkonäkö päivitettiin nykyaikaiseen muotoon. 
+
+Haasteena kuitenkin ilmeni tietokannan laajentaminen, jossa estimoidut lisäykset eivät täsmänneet tarvittavaa aikaa. 
+
 
 ## Projektin sujuvuus ja opit
 Projektissa opittiin työskentelyä pienessä ketteränohjelmistokehityksen tiimissä. Projektin aikana opeteltiin uusia työskentelytapoja, kommunikaatiota, kokouskäytäntöjä ja dokumentaatiota. Kokouskäytännöt sujuivat hyvin koko projektin aikana ja niiden arvo huomattiin retroperspektiiveissä, joka vahvisti käytäntöjen toteuttamista. Asiakastapaamisia edeltävät pre meet-up kokoukset koettiin todella hyväksi käytännöksi ja asiakastapaamisen jälkeen suoritettava retroperspektiivi ja uuden sprintin suunnittelu kriittisiksi.
